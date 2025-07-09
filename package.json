@@ -1,36 +1,26 @@
 {
-	"name": "@ktarmyshov/npm-typescript-template",
-	"description": "Template repository for npm packages written in TypeScript",
-	"version": "0.0.6",
+	"name": "@ktarmyshov/income-tax",
+	"description": "A Node.js library for calculating income tax.",
+	"version": "0.0.1",
 	"license": "MIT",
 	"author": {
 		"name": "Konstantin Tarmyshov",
 		"email": "k.tarmyshov@googlemail.com"
 	},
 	"keywords": [
-		"node",
-		"javascript",
-		"typescript",
-		"nodejs",
-		"node_modules",
-		"npm",
-		"template",
-		"auto-update",
-		"auto-release",
-		"sonar",
-		"sonarcloud",
-		"codeql",
-		"eslint",
-		"prettier",
-		"changeset"
+		"income",
+		"tax",
+		"calculator",
+		"calculate",
+		"germany"
 	],
-	"homepage": "https://github.com/kt-npm-modules/npm-typescript-template#readme",
+	"homepage": "https://github.com/kt-npm-modules/income-tax#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/kt-npm-modules/npm-typescript-template.git"
+		"url": "git+https://github.com/kt-npm-modules/income-tax.git"
 	},
 	"bugs": {
-		"url": "https://github.com/kt-npm-modules/npm-typescript-template/issues"
+		"url": "https://github.com/kt-npm-modules/income-tax/issues"
 	},
 	"type": "module",
 	"types": "./dist/index.d.ts",
@@ -69,6 +59,7 @@
 		"@vitest/coverage-istanbul": "^3.1.1",
 		"eslint": "^9.22.0",
 		"eslint-config-prettier": "^10.1.2",
+		"german-income-tax": "^1.0.2",
 		"prettier": "^3.5.3",
 		"publint": "^0.3.11",
 		"rimraf": "^6.0.1",
@@ -79,5 +70,10 @@
 	},
 	"engines": {
 		"node": ">=20"
+	},
+	"dependencies": {
+		"@ktarmyshov/assert": "^0.1.0",
+		"decimal.js": "^10.6.0",
+		"type-fest": "^4.41.0"
 	}
 }
