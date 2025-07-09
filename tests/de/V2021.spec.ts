@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deIncomeTaxV2021 } from '../../src/de/V2021/income.js';
+import { deIncomeTaxV2021 } from '../../src/de/V2021/index.js';
 import { DEIncome, DEIncomeTax, DETaxOptions } from '../../src/de/types.js';
 
 type ZoneTestCase = {
