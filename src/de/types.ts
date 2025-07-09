@@ -3,12 +3,12 @@ import { DESolidaritySurchargeYearParamsV2021 } from './V2021/solidarity-params'
 
 export type DEIncome = {
 	taxable: number;
-	progression?: number;
+	// progression?: number;
 };
 
 export type DETaxOptions = {
 	split?: boolean;
-	church?: DEFederalLandCode;
+	// church?: DEFederalLandCode;
 	incomeTaxParams?: DEIncomeTaxYearParamsV2021;
 	solidaritySurchargeParams?: DESolidaritySurchargeYearParamsV2021;
 };

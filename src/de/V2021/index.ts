@@ -11,8 +11,8 @@ export function deIncomeTaxV2021(
 	income: DEIncome,
 	options?: DETaxOptions
 ): DEIncomeTax {
-	assert.ok(income.progression === undefined, 'Progression is not supported yet');
-	assert.ok(options?.church === undefined, 'Church tax is not supported yet');
+	// assert.ok(income.progression === undefined, 'Progression is not supported yet');
+	// assert.ok(options?.church === undefined, 'Church tax is not supported yet');
 
 	// Validate inputs
 	assert.ok(Number.isInteger(year), 'Year must be an integer');
