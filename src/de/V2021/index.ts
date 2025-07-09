@@ -21,10 +21,9 @@ export function deIncomeTaxV2021(
 
 	// Prepare options
 	const opts = { ...defaultDETaxOptions, ...options };
-	// Get the tax parameters for the specified year
+	// Calculate the income tax
 	const yearParams = options?.incomeTaxParams ?? DEIncomeTaxSupportedYearsParamsV2021[year];
 	assert.ok(yearParams, `Cannot find tax parameters for year ${year}`);
-	// Calculate the income tax
 	// If split is true, divide the income by 2, TODO: handle progression income
 	const incomeValue = opts.split ? income.taxable / 2 : income.taxable;
 	const incomeTax = calculateIncomeTaxYear(incomeValue, yearParams);
