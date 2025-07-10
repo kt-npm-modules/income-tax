@@ -304,6 +304,18 @@ const testCases: TestCases = {
 			},
 			{
 				input: {
+					income: { taxable: 115838 },
+					options: { split: true }
+				},
+				output: {
+					income: 30378,
+					solidarity: 0,
+					total: 30378,
+					rates: { incomeMarginal: 0.42, incomeAverage: 0.2622, solidarity: 0, total: 0.2622 }
+				}
+			},
+			{
+				input: {
 					income: { taxable: 166265 }
 				},
 				output: {
