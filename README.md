@@ -74,12 +74,12 @@ const tax = deIncomeTaxV2021(
 					percentage: 0.45
 				}
 			}
+		},
+		solidaritySurchargeParams: {
+			zeroBoundary: 17543,
+			mitigationZoneBoundary: 32619,
+			mitigationZoneRate: 0.119
 		}
-	},
-  solidaritySurchargeParams: {
-    zeroBoundary: 17543,
-    mitigationZoneBoundary: 32619,
-    mitigationZoneRate: 0.119
-  }
+	}
 );
 ```
