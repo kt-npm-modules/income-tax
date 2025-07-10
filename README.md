@@ -9,12 +9,77 @@
 
 # income-tax
 
-Income tax calculator (at the moment only germany)
+Income tax calculator.
+Supported countries:
+
+- Germany
+  - Model as of 2021 for income tax and solidarity surcharge
+  - Included parameters for years
+    - 2021
+    - 2025
 
 # Usage
 
 ## Germany/DE
 
 ```ts
-...
+import { DEIncome, deIncomeTaxV2021 } from '@ktarmyshov/income-tax';
+// or
+import { DEIncome, deIncomeTaxV2021 } from '@ktarmyshov/income-tax/de';
+
+// Single
+const tax = deIncomeTaxV2021(2025, { income: 50000 });
+// Split
+const tax = deIncomeTaxV2021(2025, { income: 50000 }, { split: true });
+// Custom parameters for taxation if not included in the package
+const tax = deIncomeTaxV2021(
+	2023,
+	{ income: 50000 },
+	{
+		split: true,
+		incomeTaxParams: {
+			0: {
+				boundary: 10908
+			},
+			// Year 2023, zone 1
+			// ESt = (979,18 * y + 1.400) * y
+			// y = (zvE - 10.908) / 10.000
+			1: {
+				boundary: 15999,
+				params: {
+					subtractor: 10908,
+					progression: 979.18,
+					constant: 1400
+				}
+			},
+			// year 2023, zone 2
+			// ESt = (192,59 * z + 2.397) * z + 966,53
+			// z = (zvE - 15.999) / 10.000
+			2: {
+				boundary: 62809,
+				params: {
+					subtractor: 15999,
+					progression: 192.59,
+					constant: 2397
+				}
+			},
+			3: {
+				boundary: 277825,
+				params: {
+					percentage: 0.42
+				}
+			},
+			4: {
+				params: {
+					percentage: 0.45
+				}
+			}
+		}
+	},
+  solidaritySurchargeParams: {
+    zeroBoundary: 17543,
+    mitigationZoneBoundary: 32619,
+    mitigationZoneRate: 0.119
+  }
+);
 ```

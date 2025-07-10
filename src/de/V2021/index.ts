@@ -6,6 +6,16 @@ import { calculateIncomeTaxYear } from './income.js';
 import { deSolidaritySurchargeSupportedYearsParamsV2021 } from './solidarity-params.js';
 import { calculateSolidaritySurcharge } from './solidarity.js';
 
+export { deIncomeTaxSupportedYearsParamsV2021 } from './income-params.js';
+export { deSolidaritySurchargeSupportedYearsParamsV2021 } from './solidarity-params.js';
+
+/**
+ * Calculate the income tax for Germany for the year 2021.
+ * @param year - The year for which to calculate the income tax.
+ * @param income - The income object containing taxable income and other properties.
+ * @param options - Optional parameters for the tax calculation.
+ * @returns An object containing the calculated taxes, rates, solidarity surcharge, and total tax.
+ */
 export function deIncomeTaxV2021(
 	year: number,
 	income: DEIncome,
@@ -32,7 +42,7 @@ export function deIncomeTaxV2021(
 	const floorIncomeTax = opts.split ? floorIncomeTaxRaw.mul(2) : floorIncomeTaxRaw; // If split, multiply by 2
 	const marginalTaxRate = incomeTax.marginalTaxRate; // Marginal tax rate is already calculated
 	const outMarginalTaxRate = marginalTaxRate.toDecimalPlaces(4, Decimal.ROUND_FLOOR); // Round down to 4 decimal places
-	const averageTaxRate = floorIncomeTax.div(income.taxable); // Average tax rate is the total tax divided by the income
+	const averageTaxRate = income.taxable > 0 ? floorIncomeTax.div(income.taxable) : new Decimal(0); // Average tax rate is the total tax divided by the income
 	const outAverageTaxRate = averageTaxRate.toDecimalPlaces(4); // Round to 4 decimal places
 	// Calculate solidarity surcharge if applicable
 	const solidarityParams =
@@ -45,7 +55,8 @@ export function deIncomeTaxV2021(
 	// Floor to the 2 decimal places
 	const solidaritySurcharge = opts.split ? solidaritySurchargeRaw.mul(2) : solidaritySurchargeRaw;
 	const floorSolidaritySurcharge = solidaritySurcharge.toDecimalPlaces(2, Decimal.ROUND_FLOOR); // Round down to 2 decimal places
-	const solidarityRate = floorSolidaritySurcharge.div(income.taxable);
+	const solidarityRate =
+		income.taxable > 0 ? floorSolidaritySurcharge.div(income.taxable) : new Decimal(0);
 	const outSolidarityRate = solidarityRate.toDecimalPlaces(4); // Round to 4 decimal places
 
 	// Calculate total tax
