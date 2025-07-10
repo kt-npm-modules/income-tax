@@ -12,7 +12,9 @@
 Income tax calculator (at the moment only germany)
 
 # Usage
+
 ## Germany/DE
+
 ```ts
 ...
 ```
