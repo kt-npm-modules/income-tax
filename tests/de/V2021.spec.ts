@@ -316,12 +316,31 @@ const testCases: TestCases = {
 			},
 			{
 				input: {
+					// Middle of the third progression zone
 					income: { taxable: 166265 }
 				},
 				output: {
 					income: 60694,
 					solidarity: 3338.17,
 					total: 64032.17,
+					rates: {
+						incomeMarginal: 0.42,
+						incomeAverage: 0.365,
+						solidarity: 0.0201,
+						total: 0.3851
+					}
+				}
+			},
+			{
+				input: {
+					// Middle of the third progression zone
+					income: { taxable: 332531 },
+					options: { split: true }
+				},
+				output: {
+					income: 121388,
+					solidarity: 6676.34,
+					total: 128064.34,
 					rates: {
 						incomeMarginal: 0.42,
 						incomeAverage: 0.365,
@@ -348,18 +367,35 @@ const testCases: TestCases = {
 			},
 			{
 				input: {
-					income: { taxable: 200000 },
+					income: { taxable: 549224 },
 					options: { split: true }
 				},
 				output: {
-					income: 65726,
-					solidarity: 3614.93,
-					total: 69340.93,
+					income: 212400,
+					solidarity: 11682,
+					total: 224082,
 					rates: {
 						incomeMarginal: 0.42,
-						incomeAverage: 0.3286,
-						solidarity: 0.0181,
-						total: 0.3467
+						incomeAverage: 0.3867,
+						solidarity: 0.0213,
+						total: 0.408
+					}
+				}
+			},
+			{
+				input: {
+					income: { taxable: 549225 },
+					options: { split: true }
+				},
+				output: {
+					income: 212400,
+					solidarity: 11682,
+					total: 224082,
+					rates: {
+						incomeMarginal: 0.42,
+						incomeAverage: 0.3867,
+						solidarity: 0.0213,
+						total: 0.408
 					}
 				}
 			}
@@ -383,12 +419,46 @@ const testCases: TestCases = {
 			},
 			{
 				input: {
+					income: { taxable: 549226 },
+					options: { split: true }
+				},
+				output: {
+					income: 212400,
+					solidarity: 11682,
+					total: 224082,
+					rates: {
+						incomeMarginal: 0.45,
+						incomeAverage: 0.3867,
+						solidarity: 0.0213,
+						total: 0.408
+					}
+				}
+			},
+			{
+				input: {
 					income: { taxable: 500000 }
 				},
 				output: {
 					income: 207625,
 					solidarity: 11419.37,
 					total: 219044.37,
+					rates: {
+						incomeMarginal: 0.45,
+						incomeAverage: 0.4153,
+						solidarity: 0.0228,
+						total: 0.4381
+					}
+				}
+			},
+			{
+				input: {
+					income: { taxable: 1_000_000 },
+					options: { split: true }
+				},
+				output: {
+					income: 415250,
+					solidarity: 22838.75,
+					total: 438088.75,
 					rates: {
 						incomeMarginal: 0.45,
 						incomeAverage: 0.4153,
