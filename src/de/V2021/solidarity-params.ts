@@ -17,7 +17,12 @@ const SolidaritySurchargeSupportedYearsParamsV2021: DESolidaritySurchargeAllYear
 		zeroBoundary: 16956,
 		mitigationZoneBoundary: 31528,
 		mitigationZoneRate: 0.119
+	},
+	2025: {
+		zeroBoundary: 19950,
+		mitigationZoneBoundary: 37094.53,
+		mitigationZoneRate: 0.119
 	}
 };
-export const DESolidaritySurchargeSupportedYearsParamsV2021: ReadonlyDeep<DESolidaritySurchargeAllYearsParamsV2021> =
+export const deSolidaritySurchargeSupportedYearsParamsV2021: ReadonlyDeep<DESolidaritySurchargeAllYearsParamsV2021> =
 	Object.freeze(SolidaritySurchargeSupportedYearsParamsV2021);

@@ -1,9 +1,9 @@
 import assert from '@ktarmyshov/assert';
 import Decimal from 'decimal.js';
 import { defaultDETaxOptions, DEIncome, DEIncomeTax, DETaxOptions } from '../types.js';
-import { DEIncomeTaxSupportedYearsParamsV2021 } from './income-params.js';
+import { deIncomeTaxSupportedYearsParamsV2021 } from './income-params.js';
 import { calculateIncomeTaxYear } from './income.js';
-import { DESolidaritySurchargeSupportedYearsParamsV2021 } from './solidarity-params.js';
+import { deSolidaritySurchargeSupportedYearsParamsV2021 } from './solidarity-params.js';
 import { calculateSolidaritySurcharge } from './solidarity.js';
 
 export function deIncomeTaxV2021(
@@ -22,7 +22,7 @@ export function deIncomeTaxV2021(
 	// Prepare options
 	const opts = { ...defaultDETaxOptions, ...options };
 	// Calculate the income tax
-	const yearParams = options?.incomeTaxParams ?? DEIncomeTaxSupportedYearsParamsV2021[year];
+	const yearParams = options?.incomeTaxParams ?? deIncomeTaxSupportedYearsParamsV2021[year];
 	assert.ok(yearParams, `Cannot find income tax parameters for year ${year}`);
 	// If split is true, divide the income by 2, TODO: handle progression income
 	const incomeValue = new Decimal(opts.split ? income.taxable / 2 : income.taxable).floor(); // Floor down the income to the nearest integer
@@ -31,10 +31,12 @@ export function deIncomeTaxV2021(
 	const floorIncomeTaxRaw = incomeTaxRawValue.floor(); // Floor down the tax to the nearest integer
 	const floorIncomeTax = opts.split ? floorIncomeTaxRaw.mul(2) : floorIncomeTaxRaw; // If split, multiply by 2
 	const marginalTaxRate = incomeTax.marginalTaxRate; // Marginal tax rate is already calculated
+	const outMarginalTaxRate = marginalTaxRate.toDecimalPlaces(4, Decimal.ROUND_FLOOR); // Round down to 4 decimal places
 	const averageTaxRate = floorIncomeTax.div(income.taxable); // Average tax rate is the total tax divided by the income
+	const outAverageTaxRate = averageTaxRate.toDecimalPlaces(4); // Round to 4 decimal places
 	// Calculate solidarity surcharge if applicable
 	const solidarityParams =
-		opts.solidaritySurchargeParams ?? DESolidaritySurchargeSupportedYearsParamsV2021[year];
+		opts.solidaritySurchargeParams ?? deSolidaritySurchargeSupportedYearsParamsV2021[year];
 	assert.ok(solidarityParams, `Cannot find solidarity surcharge parameters for year ${year}`);
 	const solidaritySurchargeRaw = calculateSolidaritySurcharge(
 		floorIncomeTaxRaw.toNumber(),
@@ -44,21 +46,22 @@ export function deIncomeTaxV2021(
 	const solidaritySurcharge = opts.split ? solidaritySurchargeRaw.mul(2) : solidaritySurchargeRaw;
 	const floorSolidaritySurcharge = solidaritySurcharge.toDecimalPlaces(2, Decimal.ROUND_FLOOR); // Round down to 2 decimal places
 	const solidarityRate = floorSolidaritySurcharge.div(income.taxable);
+	const outSolidarityRate = solidarityRate.toDecimalPlaces(4); // Round to 4 decimal places
 
 	// Calculate total tax
 	const floorTotalTax = floorIncomeTax.plus(floorSolidaritySurcharge);
-	const totalTaxRate = floorTotalTax.div(income.taxable);
+	const outTotalTaxRate = averageTaxRate.plus(outSolidarityRate).toDecimalPlaces(4); // Round to 4 decimal places
 	return {
 		income: floorIncomeTax.toNumber(),
 		rates: {
 			// Floor to the 4th decimal place
-			incomeMarginal: marginalTaxRate.toDecimalPlaces(4, Decimal.ROUND_FLOOR).toNumber(),
+			incomeMarginal: outMarginalTaxRate.toNumber(),
 			// Round to the 4th decimal place
-			incomeAverage: averageTaxRate.toDecimalPlaces(4).toNumber(),
+			incomeAverage: outAverageTaxRate.toNumber(),
 			// Round to the 4th decimal place
-			solidarity: solidarityRate.toDecimalPlaces(4).toNumber(),
+			solidarity: outSolidarityRate.toNumber(),
 			// Round to the 4th decimal place
-			total: totalTaxRate.toDecimalPlaces(4).toNumber()
+			total: outTotalTaxRate.toNumber()
 		},
 		solidarity: floorSolidaritySurcharge.toNumber(),
 		total: floorTotalTax.toNumber()

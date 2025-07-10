@@ -71,7 +71,39 @@ const IncomeTaxSupportedYearsParamsV2021: DEIncomeTaxAllYearsParamsV2021 = {
 				percentage: 0.45
 			}
 		}
+	},
+	2025: {
+		0: {
+			boundary: 12096
+		},
+		1: {
+			boundary: 17443,
+			params: {
+				subtractor: 12096,
+				progression: 932.3,
+				constant: 1400
+			}
+		},
+		2: {
+			boundary: 68480,
+			params: {
+				subtractor: 17443,
+				progression: 176.64,
+				constant: 2397
+			}
+		},
+		3: {
+			boundary: 277825,
+			params: {
+				percentage: 0.42
+			}
+		},
+		4: {
+			params: {
+				percentage: 0.45
+			}
+		}
 	}
 };
-export const DEIncomeTaxSupportedYearsParamsV2021: ReadonlyDeep<DEIncomeTaxAllYearsParamsV2021> =
+export const deIncomeTaxSupportedYearsParamsV2021: ReadonlyDeep<DEIncomeTaxAllYearsParamsV2021> =
 	Object.freeze(IncomeTaxSupportedYearsParamsV2021);
