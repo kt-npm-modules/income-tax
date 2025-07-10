@@ -93,8 +93,6 @@ jobs:
           # pass the matrix node version to the called workflow
           node-version: ${{ matrix.node-version }}
           cache-additional-path: ${{ vars.CACHE_ADDITIONAL_PATH }}
-          # install-script: rm -rf package-lock.json && npm install
-          # install-script: npm ci
           # cache-reset: true
 
   sonar:
