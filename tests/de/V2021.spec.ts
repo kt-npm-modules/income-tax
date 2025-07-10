@@ -17,6 +17,17 @@ const testCases: TestCases = {
 		'zone 0': [
 			{
 				input: {
+					income: { taxable: 0 }
+				},
+				output: {
+					income: 0,
+					solidarity: 0,
+					total: 0,
+					rates: { incomeMarginal: 0, incomeAverage: 0, solidarity: 0, total: 0 }
+				}
+			},
+			{
+				input: {
 					income: { taxable: 1 }
 				},
 				output: {
