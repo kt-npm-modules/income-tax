@@ -25,8 +25,8 @@ export function deIncomeTaxV2021(
 	const yearParams = options?.incomeTaxParams ?? DEIncomeTaxSupportedYearsParamsV2021[year];
 	assert.ok(yearParams, `Cannot find income tax parameters for year ${year}`);
 	// If split is true, divide the income by 2, TODO: handle progression income
-	const incomeValue = opts.split ? income.taxable / 2 : income.taxable;
-	const incomeTax = calculateIncomeTaxYear(incomeValue, yearParams);
+	const incomeValue = new Decimal(opts.split ? income.taxable / 2 : income.taxable).floor(); // Floor down the income to the nearest integer
+	const incomeTax = calculateIncomeTaxYear(incomeValue.toNumber(), yearParams);
 	const incomeTaxRawValue = incomeTax.tax;
 	const floorIncomeTaxRaw = incomeTaxRawValue.floor(); // Floor down the tax to the nearest integer
 	const floorIncomeTax = opts.split ? floorIncomeTaxRaw.mul(2) : floorIncomeTaxRaw; // If split, multiply by 2
