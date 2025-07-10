@@ -60,6 +60,18 @@ const testCases: TestCases = {
 					total: 0,
 					rates: { incomeMarginal: 0, incomeAverage: 0, solidarity: 0, total: 0 }
 				}
+			},
+			{
+				input: {
+					income: { taxable: 19489 },
+					options: { split: true }
+				},
+				output: {
+					income: 0,
+					solidarity: 0,
+					total: 0,
+					rates: { incomeMarginal: 0, incomeAverage: 0, solidarity: 0, total: 0 }
+				}
 			}
 		],
 		'zone 1': [
@@ -72,18 +84,6 @@ const testCases: TestCases = {
 					solidarity: 0,
 					total: 0,
 					rates: { incomeMarginal: 0.14, incomeAverage: 0, solidarity: 0, total: 0 }
-				}
-			},
-			{
-				input: {
-					income: { taxable: 19489 },
-					options: { split: true }
-				},
-				output: {
-					income: 0,
-					solidarity: 0,
-					total: 0,
-					rates: { incomeMarginal: 0, incomeAverage: 0, solidarity: 0, total: 0 }
 				}
 			},
 			{
@@ -191,6 +191,18 @@ const testCases: TestCases = {
 					total: 1900,
 					rates: { incomeMarginal: 0.2397, incomeAverage: 0.0644, solidarity: 0, total: 0.0644 }
 				}
+			},
+			{
+				input: {
+					income: { taxable: 29507 },
+					options: { split: true }
+				},
+				output: {
+					income: 1900,
+					solidarity: 0,
+					total: 1900,
+					rates: { incomeMarginal: 0.2397, incomeAverage: 0.0644, solidarity: 0, total: 0.0644 }
+				}
 			}
 		],
 		'zone 2': [
@@ -207,6 +219,19 @@ const testCases: TestCases = {
 			},
 			{
 				input: {
+					income: { taxable: 29508 },
+					options: { split: true }
+				},
+				output: {
+					income: 1902,
+					solidarity: 0,
+					total: 1902,
+					rates: { incomeMarginal: 0.2397, incomeAverage: 0.0645, solidarity: 0, total: 0.0645 }
+				}
+			},
+			{
+				input: {
+					// Middle of the second progression zone
 					income: { taxable: 36336 }
 				},
 				output: {
@@ -218,12 +243,49 @@ const testCases: TestCases = {
 			},
 			{
 				input: {
+					// Middle of the second progression zone
+					income: { taxable: 72672 },
+					options: { split: true }
+				},
+				output: {
+					income: 14194,
+					solidarity: 0,
+					total: 14194,
+					rates: { incomeMarginal: 0.3298, incomeAverage: 0.1953, solidarity: 0, total: 0.1953 }
+				}
+			},
+			{
+				input: {
 					income: { taxable: 57918 }
 				},
 				output: {
 					income: 15188,
 					solidarity: 0,
 					total: 15188,
+					rates: { incomeMarginal: 0.42, incomeAverage: 0.2622, solidarity: 0, total: 0.2622 }
+				}
+			},
+			{
+				input: {
+					income: { taxable: 115836 },
+					options: { split: true }
+				},
+				output: {
+					income: 30376,
+					solidarity: 0,
+					total: 30376,
+					rates: { incomeMarginal: 0.42, incomeAverage: 0.2622, solidarity: 0, total: 0.2622 }
+				}
+			},
+			{
+				input: {
+					income: { taxable: 115837 },
+					options: { split: true }
+				},
+				output: {
+					income: 30376,
+					solidarity: 0,
+					total: 30376,
 					rates: { incomeMarginal: 0.42, incomeAverage: 0.2622, solidarity: 0, total: 0.2622 }
 				}
 			}
