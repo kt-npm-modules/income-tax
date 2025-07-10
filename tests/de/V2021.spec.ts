@@ -316,6 +316,23 @@ const testCases: TestCases = {
 			},
 			{
 				input: {
+					// Solidarity mitigation zone
+					income: { taxable: 70000 }
+				},
+				output: {
+					income: 20263,
+					solidarity: 393.53,
+					total: 20656.53,
+					rates: {
+						incomeMarginal: 0.42,
+						incomeAverage: 0.2895,
+						solidarity: 0.0056,
+						total: 0.2951
+					}
+				}
+			},
+			{
+				input: {
 					// Middle of the third progression zone
 					income: { taxable: 166265 }
 				},
