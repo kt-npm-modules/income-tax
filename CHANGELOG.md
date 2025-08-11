@@ -1,5 +1,16 @@
 # @ktarmyshov/income-tax
 
+## 0.1.2
+
+### Patch Changes
+
+- 9025df3: dependabot: directory '/', update @eslint/compat
+- 9025df3: dependabot: directory '/', update @ktarmyshov/assert
+- 9025df3: dependabot: directory '/', update @types/node
+- 9025df3: dependabot: directory '/', update eslint
+- 9025df3: dependabot: directory '/', update typescript-eslint
+- 9025df3: dependabot: directory '/', update typescript
+
 ## 0.1.1
 
 ### Patch Changes
