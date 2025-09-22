@@ -78,6 +78,6 @@
 	"dependencies": {
 		"@ktarmyshov/assert": "^0.1.0",
 		"decimal.js": "^10.6.0",
-		"type-fest": "^4.41.0"
+		"type-fest": "^5.0.1"
 	}
 }
