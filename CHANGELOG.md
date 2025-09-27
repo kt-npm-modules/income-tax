@@ -1,5 +1,22 @@
 # @ktarmyshov/income-tax
 
+## 0.1.3
+
+### Patch Changes
+
+- 0ec0dab: dependabot: directory '/', update @ktarmyshov/assert
+- 0ec0dab: dependabot: directory '/', update @types/node
+- 0ec0dab: dependabot: directory '/', update eslint
+- 0ec0dab: dependabot: directory '/', update typescript-eslint
+- 8caf801: dependabot: directory '/', update @changesets/cli
+- 8caf801: dependabot: directory '/', update @types/node
+- 8caf801: dependabot: directory '/', update eslint
+- 8caf801: dependabot: directory '/', update publint
+- 8caf801: dependabot: directory '/', update type-fest
+- 8caf801: dependabot: directory '/', update typescript-eslint
+- 4008c21: dependabot: directory '/', update @eslint/compat
+- 4008c21: dependabot: directory '/', update typescript-eslint
+
 ## 0.1.2
 
 ### Patch Changes
