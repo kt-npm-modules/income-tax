@@ -1,7 +1,7 @@
 {
 	"name": "@ktarmyshov/income-tax",
 	"description": "A Node.js library for calculating income tax.",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"license": "MIT",
 	"author": {
 		"name": "Konstantin Tarmyshov",
