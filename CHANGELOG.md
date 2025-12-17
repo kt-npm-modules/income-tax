@@ -1,5 +1,27 @@
 # @ktarmyshov/income-tax
 
+## 0.1.6
+
+### Patch Changes
+
+- 080d534: dependabot: directory '/', update @changesets/cli
+- 080d534: dependabot: directory '/', update @eslint/compat
+- 080d534: dependabot: directory '/', update @ktarmyshov/assert
+- 080d534: dependabot: directory '/', update @types/node
+- 080d534: dependabot: directory '/', update @vitest/coverage-istanbul
+- 080d534: dependabot: directory '/', update eslint
+- 080d534: dependabot: directory '/', update prettier
+- 080d534: dependabot: directory '/', update publint
+- 080d534: dependabot: directory '/', update rimraf
+- 080d534: dependabot: directory '/', update type-fest
+- 080d534: dependabot: directory '/', update typescript-eslint
+- 080d534: dependabot: directory '/', update vitest
+- 32aa80d: dependabot: directory '/', update @types/node
+- 32aa80d: dependabot: directory '/', update @vitest/coverage-istanbul
+- 32aa80d: dependabot: directory '/', update typescript-eslint
+- 32aa80d: dependabot: directory '/', update vitest
+- e62e8d5: dependabot: directory '/', update @ktarmyshov/assert
+
 ## 0.1.5
 
 ### Patch Changes
