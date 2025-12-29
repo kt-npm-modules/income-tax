@@ -1,5 +1,11 @@
 # @ktarmyshov/income-tax
 
+## 0.1.7
+
+### Patch Changes
+
+- 3d81f6d: dependabot: directory '/', update typescript-eslint
+
 ## 0.1.6
 
 ### Patch Changes
