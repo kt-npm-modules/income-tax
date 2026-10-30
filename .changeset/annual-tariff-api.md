@@ -1,5 +1,5 @@
 ---
-'@ktarmyshov/income-tax': minor
+'@ktarmyshov/income-tax': major
 ---
 
 Introduce `deIncomeTax(income, parameters, options)` and update `deIncomeTaxV2021` to use the same argument order. Pass a supported year (2021–2026) or a complete versioned parameter object, with assessment options such as `split` kept separate.

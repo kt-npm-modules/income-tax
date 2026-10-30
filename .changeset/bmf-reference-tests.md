@@ -1,5 +1,5 @@
 ---
-'@ktarmyshov/income-tax': patch
+'@ktarmyshov/income-tax': major
 ---
 
 Match BMF's displayed total rate by adding the rounded income-tax and solidarity rates with Decimal arithmetic. Tax amounts are unchanged.
