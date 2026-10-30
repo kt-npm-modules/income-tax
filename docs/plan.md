@@ -1,6 +1,6 @@
 # Income tax package revival plan
 
-Research date: 2026-10-30. Status: checkpoints 1–2 complete; checkpoints 3–5 pending.
+Research date: 2026-10-30. Status: checkpoints 1–2 complete; checkpoint 3 implementation complete with regression tests deferred by the user; checkpoints 4–5 pending.
 
 ## Scope and agreed constraints
 
@@ -154,13 +154,13 @@ Acceptance: a reviewable workflow diff with no unrelated template features; loca
 
 ### 3. Correct tariff calculations and add offline regression coverage
 
-- [ ] Add failing regressions for the demonstrated ESt and Soli discrepancies before changing calculation logic.
-- [ ] Encode explicit statutory offsets for built-in years, preserve decimal arithmetic, and settle custom-parameter compatibility.
-- [ ] Correct solidarity capping and verify splitting/rounding; address input validation and rate definitions with documented behavior.
+- [ ] Add regressions for the demonstrated ESt and Soli discrepancies. The user explicitly deferred test changes and test execution while authorizing the implementation.
+- [x] Encode explicit statutory offsets for built-in years, preserve decimal arithmetic, and settle custom-parameter compatibility through the new versioned API.
+- [x] Correct solidarity capping and splitting/rounding; address input validation and rate definitions. Regression coverage remains deferred.
 - [ ] Compare an independent literal implementation of each year's official formulas against the package across a broad deterministic income range, in addition to focused boundaries and fraction cases. Do not generate expected values from the production helper.
 - [ ] Review existing expected results instead of bulk-replacing them with the new implementation's output.
-- [ ] Decide whether to add 2026 parameters as a separate visible extension. Fixing existing 2021/2025 correctness is required; adding missing years is not implicit in a tooling update.
-- [ ] Add a changeset for user-visible numerical fixes and any runtime/API compatibility changes.
+- [x] Add all final annual parameters for 2021–2026, as explicitly requested by the user.
+- [x] Add a changeset for user-visible numerical fixes and the new API/parameter contract.
 
 Acceptance: the demonstrated discrepancies are fixed, offline regressions pass, and supported-year results match an independent statutory reference across the chosen coverage range.
 
@@ -218,3 +218,62 @@ Record commands/results and changed-file boundaries after each checkpoint. Final
 - Reference behavior retained: the aggregate required jobs use the reference default dependency handling, so dependency failure/skipping can skip the aggregate jobs rather than explicitly failing them. This and the inactive manual-release path were identified during review and deliberately left unchanged after the user requested exact reference behavior.
 - Remote follow-up after an authorized push: observe GitHub matrix runs, coverage artifacts and Sonar; verify `MATRIX_NODE_VERSION` does not override the default with Node 20, review `CACHE_RESET`, confirm `SONAR_TOKEN`, `WORKFLOW_APP_ID`/`WORKFLOW_APP_PRIVATE_KEY`, optional `APPROVE_APP_ID`/`APPROVE_APP_PRIVATE_KEY`, and publishing configuration. Branch rules must refer to the intended `required-*` check names. Remote secrets/rules and actual release behavior were not changed or verified by local checks.
 - Changed boundaries: `.github/workflows` and `.github/dependabot.yml`, `.gitignore`, `.sonarcloud.properties`, `vitest.config.ts`, the two maintenance scripts, and this plan. No calculation code, tax parameters, package dependencies, or README content changed.
+
+### Checkpoint 3 implementation (2026-10-30; tests deferred)
+
+The user began the API refactor and then authorized completing interfaces/exports, correcting the BMF formulas, and adding every year from 2021 through 2026. They explicitly deferred both changing and running the existing tests. No test files were modified, and `test`, `coverage`, and `check:test` were not run during this checkpoint. Existing tests and README examples still use the former argument order and must be migrated in their respective later steps.
+
+Implemented API:
+
+```ts
+import {
+	deIncomeTax,
+	deIncomeTaxV2021,
+	deSupportedTaxParametersV2021
+} from '@ktarmyshov/income-tax';
+
+deIncomeTax({ taxable: 50000 }, 2026);
+deIncomeTax({ taxable: 100000 }, 2026, { split: true });
+deIncomeTax({ taxable: 50000 }, deSupportedTaxParametersV2021[2026]);
+deIncomeTaxV2021({ taxable: 50000 }, 2026);
+```
+
+- Preserved the user's separation of input, year/versioned parameters, and options. Both public entry points export the input/output/rate types, common/versioned options and parameter types, supported-year unions, zone types, and combined built-in table. `version: 'V2021'` is part of each parameter set. Unsupported years and null/unsupported parameter versions fail explicitly.
+- Custom parameter objects must use the direct statutory tariff shape: `basicAllowance`, `firstProgression`, `secondProgression`, `firstLinear`, and `secondLinear`. Progressive formulas contain their published coefficients and (for the second formula) additive constant; linear formulas contain their rate and positive subtrahend. Solidarity parameters are `exemption`, `rate`, and `mitigationRate`. This intentionally replaces numbered zones, partial overrides in options, and the old year-first function signature; no compatibility overloads were added.
+- Income tax evaluates the five cases of section 32a(1) EStG directly: zero up to the basic allowance; `(a * y + b) * y`; `(a * z + b) * z + c`; then the two formulas `rate * x - subtrahend`. Here `x` is whole-euro taxable income, `y = (x - basicAllowance) / 10000`, and `z = (x - firstProgression.upperBoundary) / 10000`. No preceding-zone accumulation, generic offset, or independent variable subtractor is used.
+- Splitting uses Decimal division before whole-euro truncation, floors the half-income tax before doubling, and computes solidarity from the full assessed tax with the doubled exemption. Solidarity is the minimum of the standard rate and mitigation cap, truncated to cents once. The arbitrary rounded crossover boundary is removed.
+- Total rate is calculated directly from total tax divided by input taxable income, rounded once. The analytic marginal ESt rate retains the existing truncation to four decimal places; average/solidarity/total rates use four decimal places with explicit half-up rounding.
+- Added finite/non-negative taxable-income validation up to `Number.MAX_SAFE_INTEGER`, boolean splitting validation, and validation for required custom zone coefficients, increasing whole-euro boundaries, solidarity exemption, and rate ranges. Built-in parameter sets are deeply readonly and frozen at every object level.
+- Added `.changeset/annual-tariff-api.md` documenting API migration, changed parameter fields, numerical corrections, and the expanded year range. No dependency, workflow, or README edits were made in this checkpoint.
+
+Official annual formula sources read during implementation:
+
+| Year | Final annual basic allowance | Single-assessment Soli exemption | Income tariff source                                                                                                                                             |
+| ---- | ---------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2021 | EUR 9,744                    | EUR 16,956                       | [BMF LStH 2021, section 32a](https://lsth.bundesfinanzministerium.de/lsth/2021/A-Einkommensteuergesetz/IV-Tarif/Paragraf-32a/inhalt.html)                        |
+| 2022 | EUR 10,347                   | EUR 16,956                       | [BMF EStH 2022, section 32a](https://esth.bundesfinanzministerium.de/esth/2022/A-Einkommensteuergesetz/IV-Tarif/Paragraf-32a/inhalt.html)                        |
+| 2023 | EUR 10,908                   | EUR 17,543                       | [BMF EStH 2023, section 32a](https://esth.bundesfinanzministerium.de/esth/2023/A-Einkommensteuergesetz/IV-Tarif/Paragraf-32a/inhalt.html)                        |
+| 2024 | EUR 11,784                   | EUR 18,130                       | [BMF EStH 2024, section 32a](https://esth.bundesfinanzministerium.de/esth/2024/A-Einkommensteuergesetz/IV-Tarif-31-34b/Paragraf-32a/inhalt.html)                 |
+| 2025 | EUR 12,096                   | EUR 19,950                       | [BMF EStH 2025, section 32a](https://esth.bundesfinanzministerium.de/esth/2025/A-Einkommensteuergesetz/IV-Tarif-31-34b/Paragraf-32a/inhalt.html)                 |
+| 2026 | EUR 12,348                   | EUR 20,350                       | [BMF LStH 2026, section 32a](https://amtliche-handbuecher.bundesfinanzministerium.de/lsth/2026/A-Einkommensteuergesetz/IV-Tarif-31-34b/Paragraf-32a/inhalt.html) |
+
+Soli exemptions were also checked against the [BMF Datensammlung zur Steuerpolitik 2026](https://www.bundesfinanzministerium.de/Content/DE/Downloads/Broschueren_Bestellservice/datensammlung-zur-steuerpolitik-2026.pdf?__blob=publicationFile&v=8), section 3.5 footnote 4. The annual assessment basis, joint exemption and cap/cent rules are described in [BMF LStH 2026, SolzG sections 3–4](https://amtliche-handbuecher.bundesfinanzministerium.de/lsth/2026/B-Anhaenge/Anhang-27/I/inhalt.html). The 2022 and 2024 entries use final annual allowances rather than earlier payroll-period parameters. The EStH 2021 page fetched during research contained inconsistent top-zone figures; the separate LStH 2021 page above supplies the correct top-zone threshold 274,613 and subtraction constant 17,374.99.
+
+Validation performed without running the test suite:
+
+- `npm run check`, `npm run build`, `npm run build:release`, publint, source-only ESLint, formatting, and `git diff --check` passed.
+- An independent temporary consumer compiled all public API/type imports from the emitted `.` and `./de` modules in strict NodeNext mode with `skipLibCheck: false`, including year-based and custom-parameter calls. Temporary consumer files are outside the repository.
+- Control calculations from the built library at zvE EUR 50,000 (single) / EUR 100,000 (split) match separately evaluated literal BMF formulas: 2021 11,994 / 23,988; 2022 11,816 / 23,632; 2023 11,343 / 22,686; 2024 10,872 / 21,744; 2025 10,691 / 21,382; 2026 10,548 / 21,096.
+- Previously demonstrated discrepancies now produce ESt EUR 986 at 2021 zvE 14,899; EUR 1,024 at 2025 zvE 17,480; EUR 17,850 at 2025 zvE 68,483; EUR 105,775 at 2025 zvE 277,828. At 2021 zvE 96,821, ESt is EUR 31,528 and Soli is EUR 1,734.04. These are local control calculations, not BMF API results.
+- Existing test migration, comprehensive boundary/regression coverage, and BMF live comparisons remain pending. The prior 100% coverage result belongs to checkpoint 2 and is not a coverage result for this implementation.
+
+### Direct BMF tariff representation follow-up (2026-10-30)
+
+After the initial correction, the user explicitly authorized replacing the old parameter/zone types and calculation structure completely, while again prohibiting test changes and execution.
+
+- Removed numbered zones `0`–`4`, the generic progression/constant-zone types, `offset`, and duplicated `subtractor` fields. The tariff type now mirrors the five statutory cases with `basicAllowance`, `firstProgression`, `secondProgression`, `firstLinear`, and `secondLinear`. New exported coefficient types are `DEIncomeTaxProgressionParamsV2021` and `DEIncomeTaxLinearParamsV2021`.
+- `calculateIncomeTaxYear` directly implements both polynomial formulas using the statutory definitions of `y` and `z`, and both linear formulas using the entire `x` and their positive subtraction constants. Marginal rates are the analytic derivatives of those formulas. These TypeScript field names represent the published formulas; they are not an official BMF JSON schema.
+- Converted all six year entries to this representation without changing their published coefficients. Renamed the single-assessment solidarity threshold to `exemption` and its cap coefficient to `mitigationRate`; standard and capped surcharge calculations retain the statutory behavior already implemented.
+- Updated parameter validation, deep freezing, public exports, and the changeset to the new shape. External calls remain `deIncomeTax(income, yearOrParameters, options)` and `deIncomeTaxV2021(income, yearOrParameters, options)`.
+- Re-read the current [section 32a EStG](https://www.gesetze-im-internet.de/estg/__32a.html) and [section 4 SolzG](https://www.gesetze-im-internet.de/solzg_1995/__4.html); the historical annual formula sources remain listed above.
+- After this representation change, `npm run check`, `npm run build:release`, publint, source-only ESLint, formatting checks, and `git diff --check` passed. No tests or temporary test programs were written or run. The earlier control calculations and temporary consumer verification above precede this representation change; they are not a new regression or API verification result for it. Comprehensive tests and test migration remain deferred.

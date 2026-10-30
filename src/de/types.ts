@@ -1,52 +1,15 @@
-import type { DEIncomeTaxYearParamsV2021 } from './V2021/income-params.js';
-import type { DESolidaritySurchargeYearParamsV2021 } from './V2021/solidarity-params.js';
+import type {
+	DEIncomeTaxOptionsV2021,
+	DEIncomeTaxParametersV2021,
+	DEIncomeTaxSupportedYearsV2021
+} from './V2021/types.js';
 
-export type DEIncome = {
-	taxable: number;
-	// progression?: number;
-};
+export type DEIncomeTaxParameters = DEIncomeTaxParametersV2021;
 
-export type DETaxOptions = {
-	split?: boolean;
-	// church?: DEFederalLandCode;
-	incomeTaxParams?: DEIncomeTaxYearParamsV2021;
-	solidaritySurchargeParams?: DESolidaritySurchargeYearParamsV2021;
-};
+export type DEIncomeTaxOptions = DEIncomeTaxOptionsV2021;
 
-export type DEIncomeTaxRates = {
-	incomeMarginal: number;
-	incomeAverage: number;
-	solidarity: number;
-	// church: number;
-	total: number;
-};
+export type DEIncomeTaxSupportedYears = DEIncomeTaxSupportedYearsV2021;
 
-export type DEIncomeTax = {
-	income: number;
-	solidarity: number;
-	// church: number;
-	total: number;
-	rates: DEIncomeTaxRates;
-};
-
-export type DEFederalLandCode =
-	| 'BB' // Brandenburg
-	| 'BE' // Berlin
-	| 'BW' // Baden-Württemberg
-	| 'BY' // Bavaria
-	| 'HB' // Bremen
-	| 'HH' // Hamburg
-	| 'HE' // Hesse
-	| 'MV' // Mecklenburg-Western Pomerania
-	| 'NI' // Lower Saxony
-	| 'NW' // North Rhine-Westphalia
-	| 'RP' // Rhineland-Palatinate
-	| 'SH' // Schleswig-Holstein
-	| 'SL' // Saarland
-	| 'SN' // Saxony
-	| 'ST' // Saxony-Anhalt
-	| 'TH'; // Thuringia
-
-export const defaultDETaxOptions: DETaxOptions = {
+export const defaultDETaxOptions: DEIncomeTaxOptions = {
 	split: false
 };
