@@ -1,6 +1,6 @@
 # Income tax package revival plan
 
-Research date: 2026-10-30. Status: checkpoint 1 complete; checkpoints 2–5 pending.
+Research date: 2026-10-30. Status: checkpoints 1–2 complete; checkpoints 3–5 pending.
 
 ## Scope and agreed constraints
 
@@ -143,12 +143,12 @@ Acceptance: modern tooling works locally; public imports and intended package co
 
 ### 2. Modernize workflows and maintenance scripts
 
-- [ ] Inspect current `kt-workflows/actions` inputs and release behavior before adapting the reference workflows.
-- [ ] Adapt CI expressions, Node matrix, cache controls, contribution triggers/deduplication, matrix coverage artifacts, Sonar paths, and stable required checks.
-- [ ] Adapt release and contribution update/reset workflows with this repository's identity and existing squash-based contribution flow. Review manual release semantics explicitly.
-- [ ] Add/adapt CodeQL; review GitHub Actions dependencies as well as npm updates. Configure sensible Dependabot update groups and prevent automatic TypeScript 7 upgrades.
-- [ ] Apply fail-fast shell behavior, reconcile lockfile ignore rules, and preserve the Sonar symlink.
-- [ ] Validate workflow syntax, shell syntax, action contracts, permissions, and failure/skip propagation of aggregate checks. Record any repository variables, secrets, branch rules, or npm publishing settings needing remote verification.
+- [x] Inspect current `kt-workflows/actions` inputs and release behavior before adapting the reference workflows.
+- [x] Adapt CI expressions, Node matrix, cache controls, contribution triggers/deduplication, matrix coverage artifacts, Sonar paths, and stable required checks.
+- [x] Adapt release and contribution update/reset workflows with this repository's identity and existing squash-based contribution flow. Review manual release semantics explicitly.
+- [x] Add/adapt CodeQL; review GitHub Actions dependencies as well as npm updates. Configure sensible Dependabot update groups and prevent automatic TypeScript 7 upgrades.
+- [x] Apply fail-fast shell behavior, reconcile lockfile ignore rules, and preserve the Sonar symlink.
+- [x] Validate workflow syntax, shell syntax, action contracts, permissions, and failure/skip propagation of aggregate checks. Record any repository variables, secrets, branch rules, or npm publishing settings needing remote verification.
 
 Acceptance: a reviewable workflow diff with no unrelated template features; local/static checks pass. GitHub execution, secrets, rulesets, and publishing remain unverified until actually observed remotely.
 
@@ -203,3 +203,18 @@ Record commands/results and changed-file boundaries after each checkpoint. Final
 - Inspected `npm pack --dry-run` and created the release-build tarball in `/tmp`: 20 files, including changelog/license/README and both entry points, with no tests or source maps. Installed that tarball with production dependencies in an independent temporary consumer and compiled its imports with TypeScript 6, NodeNext, strict mode, and `skipLibCheck: false`; both entry points, public parameter types, and single/split runtime smoke checks passed.
 - `npm ls` has no invalid/missing dependencies; all installed TypeScript references resolve to 6.0.3. A fresh online `npm audit --json` reported **0 vulnerabilities**. No calculation formulas, parameter values, test expectations, README text, workflow files, or remote settings were changed.
 - Changed files: `package.json`, `package-lock.json`, `tsconfig.base.json` (new), `tsconfig.json`, `tsconfig-test.json`, `eslint.config.js`, `vitest.config.ts`, `.changeset/fresh-tooling.md` (new), `src/de/types.ts`, the five files under `src/de/V2021` that import types/Decimal (`income-params.ts`, `income.ts`, `index.ts`, `solidarity-params.ts`, `solidarity.ts`), both existing test files, and this plan. The Sonar symlink is preserved. Temporary validation artifacts are outside the repository.
+
+### Checkpoint 2 results (2026-10-30)
+
+- Followed the user's instruction to use the supplied references without introducing a different workflow design. Copied the template CI, release, CodeQL, Dependabot auto-merge/auto-release, and contribution update/reset workflows. Parsed workflow objects match the template after replacing the repository identity and removing the template-only `ci-subpackage` job and its two `needs` entries. No changes were made to `../../kt-workflows/actions`.
+- CI now follows the reference Node 22/24/26 matrix, contribution push/deduplication rules, cache-reset input, per-Node coverage artifacts, artifact-based Sonar scan, and stable `required-main`/`required-contribution` jobs. Correct expression syntax replaces the old literal action-input strings.
+- Coverage now writes to `coverage-test`; the ignore pattern is `coverage*`, and Sonar uses the reference `coverage*/**/lcov.info` pattern. Preserved the existing Sonar symlink. The redundant build invocation in CI is retained exactly as in the reference, even though this package's coverage command also builds.
+- Release now uses the reference main-branch `workflow_run` filter and shared release action without the extra lockfile-update job. The existing `changeset:version` command already runs `npm install`. Manual `workflow_dispatch` is retained exactly as in the reference; its job condition still requires successful push `workflow_run` fields, so a manual dispatch currently skips the release job.
+- Renamed `update-contribution.yml` to the reference `contribution-update.yml`, added `contribution-reset.yml`, and copied the reference `scripts/contribution-reset.sh` and fail-fast `scripts/push-update.sh`. These scripts/workflows were inspected and syntax-checked, not executed against remote branches.
+- Dependabot configuration matches the template, with one required addition: ignore TypeScript versions `>=7.0.0`. Added the reference approval-app inputs to auto-merge/auto-release. Kept the reference npm-only update ecosystem and action versions; no new update policy was invented.
+- Inspected the shared action contracts at `../../kt-workflows/actions` (HEAD `e2a8f72`) and checked all supplied input names and required inputs mechanically. The current npm CI/release/approval contracts were also available from the connected GitHub source during investigation; local references were used for the final parity check.
+- Validation: workflow YAML parsed successfully; semantic reference-parity assertions passed for all seven workflows and Dependabot; shared action input checks passed; both maintenance scripts passed `bash -n`. Official actionlint 1.7.12 was downloaded to `/tmp` with its release checksum verified. It reports one warning about inline `github.event.pull_request.head.ref` in contribution-reset logging; running it on the original template produces the same warning. With that exact inherited diagnostic filtered for checking the remaining files, actionlint reports no additional issues. ShellCheck is not installed, so actionlint's ShellCheck integration was disabled; Bash syntax was checked separately.
+- Runtime/configuration validation: `npm run coverage` passed all 73 tests with 100% statements/branches/functions/lines and generated `coverage-test/lcov.info`; the Sonar glob resolves that file. `npm run lint` passed. Both maintenance scripts match the template content and executable modes, and the Sonar symlink remains intact.
+- Reference behavior retained: the aggregate required jobs use the reference default dependency handling, so dependency failure/skipping can skip the aggregate jobs rather than explicitly failing them. This and the inactive manual-release path were identified during review and deliberately left unchanged after the user requested exact reference behavior.
+- Remote follow-up after an authorized push: observe GitHub matrix runs, coverage artifacts and Sonar; verify `MATRIX_NODE_VERSION` does not override the default with Node 20, review `CACHE_RESET`, confirm `SONAR_TOKEN`, `WORKFLOW_APP_ID`/`WORKFLOW_APP_PRIVATE_KEY`, optional `APPROVE_APP_ID`/`APPROVE_APP_PRIVATE_KEY`, and publishing configuration. Branch rules must refer to the intended `required-*` check names. Remote secrets/rules and actual release behavior were not changed or verified by local checks.
+- Changed boundaries: `.github/workflows` and `.github/dependabot.yml`, `.gitignore`, `.sonarcloud.properties`, `vitest.config.ts`, the two maintenance scripts, and this plan. No calculation code, tax parameters, package dependencies, or README content changed.
