@@ -105,6 +105,11 @@ export function deIncomeTaxV2021(
 	const rate = (amount: Decimal): number =>
 		taxable.isZero() ? 0 : amount.div(taxable).toDecimalPlaces(4, Decimal.ROUND_HALF_UP).toNumber();
 
+	const incomeAverage = rate(assessedIncomeTax);
+	const solidarityRate = rate(solidarity);
+	// Match BMF's displayed total: add the rounded component rates exactly.
+	const totalRate = new Decimal(incomeAverage).plus(solidarityRate).toNumber();
+
 	return {
 		income: assessedIncomeTax.toNumber(),
 		solidarity: solidarity.toNumber(),
@@ -112,9 +117,9 @@ export function deIncomeTaxV2021(
 		rates: {
 			// Analytic income-tax marginal rate, truncated to four decimal places.
 			incomeMarginal: incomeTax.marginalTaxRate.toDecimalPlaces(4, Decimal.ROUND_FLOOR).toNumber(),
-			incomeAverage: rate(assessedIncomeTax),
-			solidarity: rate(solidarity),
-			total: rate(total)
+			incomeAverage,
+			solidarity: solidarityRate,
+			total: totalRate
 		}
 	};
 }

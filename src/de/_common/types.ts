@@ -8,6 +8,7 @@ export type DEIncomeTaxRates = {
 	incomeAverage: number;
 	solidarity: number;
 	// church: number;
+	/** Sum of the rounded incomeAverage and solidarity rates, matching BMF display. */
 	total: number;
 };
 
