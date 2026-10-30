@@ -1,6 +1,7 @@
 import assert from '@ktarmyshov/assert';
-import Decimal from 'decimal.js';
-import { defaultDETaxOptions, DEIncome, DEIncomeTax, DETaxOptions } from '../types.js';
+import { Decimal } from 'decimal.js';
+import { defaultDETaxOptions } from '../types.js';
+import type { DEIncome, DEIncomeTax, DETaxOptions } from '../types.js';
 import { deIncomeTaxSupportedYearsParamsV2021 } from './income-params.js';
 import { calculateIncomeTaxYear } from './income.js';
 import { deSolidaritySurchargeSupportedYearsParamsV2021 } from './solidarity-params.js';

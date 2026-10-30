@@ -1,4 +1,4 @@
-import { ReadonlyDeep } from 'type-fest';
+import type { ReadonlyDeep } from 'type-fest';
 
 export type DESolidaritySurchargeYearParamsV2021 = {
 	// Threshold for solidarity surcharge, below this value it is not applied (= 0)

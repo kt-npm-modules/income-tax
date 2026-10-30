@@ -1,4 +1,4 @@
-import { ReadonlyDeep } from 'type-fest';
+import type { ReadonlyDeep } from 'type-fest';
 
 // Parameters for progressive zones, e.g.:
 // ESt = (972,87 * y + 1.400) * y; y = (zvE - 9.408) / 10.000

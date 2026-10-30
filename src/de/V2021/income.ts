@@ -1,5 +1,5 @@
-import Decimal from 'decimal.js';
-import {
+import { Decimal } from 'decimal.js';
+import type {
 	DEIncomeTaxConstantZoneParamsV2021,
 	DEIncomeTaxProgressionZoneParamsV2021,
 	DEIncomeTaxYearParamsV2021

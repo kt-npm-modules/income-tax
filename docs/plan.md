@@ -1,6 +1,6 @@
 # Income tax package revival plan
 
-Research date: 2026-10-30. Status: research complete; implementation pending.
+Research date: 2026-10-30. Status: checkpoint 1 complete; checkpoints 2–5 pending.
 
 ## Scope and agreed constraints
 
@@ -17,8 +17,8 @@ Research date: 2026-10-30. Status: research complete; implementation pending.
 - Repository: `@ktarmyshov/income-tax` 0.1.9, branch `update/to-latest`, HEAD `5913095`; initially clean working tree.
 - Reference snapshots: template `216a2cc`, digraph `34a2598`. These are local checkout references, not guarantees about their remote state.
 - Included tax parameters cover **2021 and 2025 only**. `V2021` names the model/API, not the complete set of supported years.
-- There are 72 calculation cases plus two package import smoke cases. No existing BMF requests or recorded BMF response fixtures were found in the tests/scripts.
-- No local `node_modules` directory exists. Baseline build, lint, and tests have not been executed; no dependencies were installed during research.
+- There are 71 calculation cases plus two package import smoke cases (confirmed by executing the baseline). No existing BMF requests or recorded BMF response fixtures were found in the tests/scripts.
+- At research time no local `node_modules` directory existed. Baseline installation and checks were subsequently completed in checkpoint 1; results are recorded below.
 - Local environment reports Node 24.21.0 and npm 11.19.0.
 
 ## Findings: tooling and automation
@@ -101,6 +101,8 @@ The [official developer interface](https://www.bmf-steuerrechner.de/interface/ei
 
 Research did **not** establish a working income-tax API request/response: the public developer page gates its examples behind an acknowledgement, and the attempted documentation form requests continued to show that notice. The browser host was unavailable. Therefore, endpoint, parameter names, supported historical years, amount units, output fields, and whether the relevant endpoint returns solidarity remain an explicit implementation spike. Do not substitute the Lohnsteuer PAP endpoint and compare wage withholding with annual income tax.
 
+The user subsequently supplied the revealed BMF documentation. It specifies `/interface/2026Version1.xhtml` and `/interface/2025Version1.xhtml`, a required code `LSt2026ext` valid until 2027-01-15, PAP inputs such as `LZZ`, `RE4` in cents, and `STKL`, and XML outputs including `LSTLZZ` and `SOLZLZZ`. The supplied example is a **Lohnsteuer** calculation. This resolves the previously hidden example, but does not yet establish a direct annual zvE/Einkommensteuer comparison. Revisit that mapping when implementing calculation regressions and the final API checkpoint; no live request was made as part of checkpoint 1.
+
 ## Findings: competing packages and README positioning
 
 These are discovery/documentation comparisons, not correctness endorsements or exhaustive market coverage.
@@ -129,13 +131,13 @@ README deliverables:
 
 ### 1. Establish baseline and migrate tooling with dependencies
 
-- [ ] Install the existing locked dependencies and record baseline build/check/lint/test/coverage results, including any pre-existing failures. Build before package self-import tests.
-- [ ] Run the dependency checker preview, preserving the TypeScript 6.x constraint. Choose coherent dependency versions, then update the manifest and lockfile together.
-- [ ] Decide the supported Node range against the full dependency tree. References use Node 22/24/26, but plain `>=22` is insufficient for current ESLint tooling (Node 22.13 minimum). Treat the stricter one-off `ncu` requirement separately unless it becomes a project dependency.
-- [ ] Introduce shared NodeNext compiler settings, explicit build/test boundaries, non-emitting checks, and correct imports/exports. Type-check `vitest.config.ts` and package import tests with the necessary build prerequisite.
-- [ ] Migrate ESLint configuration and direct dependencies, review globals/ignore scope, and resolve diagnostics. Update Prettier and format changed files.
-- [ ] Migrate Vitest/coverage configuration and scripts. Review every remaining dependency as described above; retain packages already current and remove only demonstrated unused dependencies.
-- [ ] Validate clean installation, source/test type checks, lint, normal/release builds, tests, and coverage. Run publint, inspect `npm pack --dry-run`, and smoke-test the actual tarball's JavaScript and declarations for `.` and `./de` from an external temporary consumer.
+- [x] Install the existing locked dependencies and record baseline build/check/lint/test/coverage results, including any pre-existing failures. Build before package self-import tests.
+- [x] Run the dependency checker preview, preserving the TypeScript 6.x constraint. Choose coherent dependency versions, then update the manifest and lockfile together.
+- [x] Decide the supported Node range against the full dependency tree. References use Node 22/24/26, but plain `>=22` is insufficient for current ESLint tooling (Node 22.13 minimum). Treat the stricter one-off `ncu` requirement separately unless it becomes a project dependency.
+- [x] Introduce shared NodeNext compiler settings, explicit build/test boundaries, non-emitting checks, and correct imports/exports. Type-check `vitest.config.ts` and package import tests with the necessary build prerequisite.
+- [x] Migrate ESLint configuration and direct dependencies, review globals/ignore scope, and resolve diagnostics. Update Prettier and format changed files.
+- [x] Migrate Vitest/coverage configuration and scripts. Review every remaining dependency as described above; retain packages already current and remove only demonstrated unused dependencies.
+- [x] Validate clean installation, source/test type checks, lint, normal/release builds, tests, and coverage. Run publint, inspect `npm pack --dry-run`, and smoke-test the actual tarball's JavaScript and declarations for `.` and `./de` from an external temporary consumer.
 
 Acceptance: modern tooling works locally; public imports and intended package contents remain intact; no calculator behavior changes are hidden in this checkpoint.
 
@@ -186,3 +188,18 @@ Acceptance: reproducible official comparison evidence exists, offline fixtures r
 ## Completion evidence
 
 Record commands/results and changed-file boundaries after each checkpoint. Final review must include the TypeScript 6.x restriction, clean-install reproducibility, package exports/declarations, corrected numerical examples, workflow limitations, and the distinction between statutory verification and observed BMF API verification.
+
+### Checkpoint 1 results (2026-10-30)
+
+- Baseline: `npm ci` installed the original lockfile. `check`, `lint`, `test`, and `coverage` passed. `test`/`coverage` reported 144 tests because 71 compiled calculation tests ran again from `dist/tests`, in addition to the 73 source tests. The initial build's publint subprocess could not write the default npm cache in the sandbox; rerunning with `npm_config_cache=/tmp/income-tax-npm-cache` passed. Baseline install reported 19 vulnerabilities (1 low, 4 moderate, 12 high, 2 critical).
+- Preview: ran `npm-check-updates@23.1.1` without mutation, excluding TypeScript from its default latest target. Queried available 6.x versions separately. Installed TypeScript 6.0.3 with `~6.0.3`, within the current typescript-eslint peer range. Vitest and V8 coverage are both pinned to 5.0.5 so their exact-version peer requirement stays aligned.
+- Dependency resolution: the first in-place major upgrade hit a conflict against the previously installed ESLint 9 tree. Regenerated the lockfile from a clean dependency tree using the reviewed manifest; no peer/engine bypass flags or overrides were used. Removed unused `tsc-alias`; retained `rimraf` because the build scripts use it and `type-fest` because emitted public declarations reference it. `decimal.js` was already current. All other direct dependencies were reviewed and updated, with `@types/node` deliberately selected from the Node 22 line.
+- Compiler/lint: introduced shared NodeNext configuration, explicit source `rootDir`, non-emitting source/test checks, and type checking for import smoke tests and Vitest configuration. Migrated ESLint to `defineConfig`, declared its direct imports, restricted Node globals to root configuration files, and enforced type-only imports. Source/test changes are import declarations only; named `Decimal` imports work with NodeNext and retain the same constructor behavior.
+- Packaging: retained `.` and `./de`, added `CHANGELOG.md` to the package allowlist, and removed redundant negative entries for directories outside that allowlist. `test` and `coverage` build first so package self-import checks work after a clean checkout. Test discovery is limited to source test files. Added a minor changeset for the runtime minimum and tooling/package fixes.
+- Node minimum: raised the declared minimum to 22.13.0 to match current ESLint requirements. Every installed package's declared Node engine accepts 22.13.0. Actual checks were run on Node 24.21.0/npm 11.19.0; other Node versions have not yet been executed. Existing CI still includes Node 20 and must be migrated in checkpoint 2 before treating this branch as ready for CI/release.
+- Coverage directory: switched to V8 while retaining `coverage/` for this checkpoint, preserving the existing Sonar path. Move to `coverage-test` and matrix artifacts together with workflows, ignore patterns, and Sonar configuration in checkpoint 2.
+- Validation passed: clean `npm ci --offline --cache /tmp/income-tax-npm-cache`, `npm run check`, `npm run check:test`, `npm run lint`, `npm test`, `npm run coverage`, `npm run build:release`, publint, and `changeset status`. Updated tests: **73/73**, two files, no duplicate execution. V8 coverage: **100%** statements, branches, functions, and lines for the existing suite; this does not demonstrate statutory correctness.
+- Verified that both type-check commands leave the built files unchanged and that `dist/tests` does not exist. Compared **8,032** single/split calculations for 2021/2025, including fractional incomes, against the baseline build: exact equality for every output field.
+- Inspected `npm pack --dry-run` and created the release-build tarball in `/tmp`: 20 files, including changelog/license/README and both entry points, with no tests or source maps. Installed that tarball with production dependencies in an independent temporary consumer and compiled its imports with TypeScript 6, NodeNext, strict mode, and `skipLibCheck: false`; both entry points, public parameter types, and single/split runtime smoke checks passed.
+- `npm ls` has no invalid/missing dependencies; all installed TypeScript references resolve to 6.0.3. A fresh online `npm audit --json` reported **0 vulnerabilities**. No calculation formulas, parameter values, test expectations, README text, workflow files, or remote settings were changed.
+- Changed files: `package.json`, `package-lock.json`, `tsconfig.base.json` (new), `tsconfig.json`, `tsconfig-test.json`, `eslint.config.js`, `vitest.config.ts`, `.changeset/fresh-tooling.md` (new), `src/de/types.ts`, the five files under `src/de/V2021` that import types/Decimal (`income-params.ts`, `income.ts`, `index.ts`, `solidarity-params.ts`, `solidarity.ts`), both existing test files, and this plan. The Sonar symlink is preserved. Temporary validation artifacts are outside the repository.

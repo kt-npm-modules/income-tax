@@ -1,9 +1,9 @@
 import {
-	DEIncome as DEIncomeMain,
+	type DEIncome as DEIncomeMain,
 	deIncomeTaxV2021 as deIncomeTaxV2021Main
 } from '@ktarmyshov/income-tax';
 import {
-	DEIncome as DEIncomeDE,
+	type DEIncome as DEIncomeDE,
 	deIncomeTaxV2021 as deIncomeTaxV2021DE
 } from '@ktarmyshov/income-tax/de';
 import { describe, expect, it } from 'vitest';

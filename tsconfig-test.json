@@ -1,5 +1,9 @@
 {
-	"extends": "./tsconfig.json",
-	"include": ["tests"],
-	"exclude": ["**/*-import.spec.ts"]
+	"extends": "./tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": ".",
+		"noEmit": true,
+		"types": ["node"]
+	},
+	"include": ["tests", "vitest.config.ts"]
 }

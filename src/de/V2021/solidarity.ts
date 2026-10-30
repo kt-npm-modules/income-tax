@@ -1,5 +1,5 @@
-import Decimal from 'decimal.js';
-import { DESolidaritySurchargeYearParamsV2021 } from './solidarity-params.js';
+import { Decimal } from 'decimal.js';
+import type { DESolidaritySurchargeYearParamsV2021 } from './solidarity-params.js';
 
 export function calculateSolidaritySurcharge(
 	incomeTax: number,

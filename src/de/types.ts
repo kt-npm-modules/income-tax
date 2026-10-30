@@ -1,5 +1,5 @@
-import { DEIncomeTaxYearParamsV2021 } from './V2021/income-params';
-import { DESolidaritySurchargeYearParamsV2021 } from './V2021/solidarity-params';
+import type { DEIncomeTaxYearParamsV2021 } from './V2021/income-params.js';
+import type { DESolidaritySurchargeYearParamsV2021 } from './V2021/solidarity-params.js';
 
 export type DEIncome = {
 	taxable: number;
