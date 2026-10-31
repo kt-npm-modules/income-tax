@@ -1,14 +1,14 @@
-# @ktarmyshov/income-tax - German Income Tax (Einkommensteuer)
-
-Calculate annual German income tax (Einkommensteuer) and solidarity surcharge (Solidaritätszuschlag) in JavaScript and TypeScript. Supply annual taxable income (zu versteuerndes Einkommen, zvE) in euros, with single or joint assessment (Ehegattensplitting). Built-in final annual tariffs cover 2021-2026; calculations use decimal arithmetic and run offline.
-
-ES modules with TypeScript declarations. For Node.js runtime requirements, see the `engines` field in [package.json](https://github.com/kt-npm-modules/income-tax/blob/main/package.json).
-
 [![npm Version](https://img.shields.io/npm/v/%40ktarmyshov%2Fincome-tax)](https://www.npmjs.com/package/@ktarmyshov/income-tax)
 [![CI](https://github.com/kt-npm-modules/income-tax/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/kt-npm-modules/income-tax/actions/workflows/ci.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kt-npm-modules_income-tax&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kt-npm-modules_income-tax)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=kt-npm-modules_income-tax&metric=coverage)](https://sonarcloud.io/summary/new_code?id=kt-npm-modules_income-tax)
 [![MIT License](https://img.shields.io/npm/l/%40ktarmyshov%2Fincome-tax)](https://github.com/kt-npm-modules/income-tax/blob/main/LICENSE)
+
+# @ktarmyshov/income-tax - German Income Tax (Einkommensteuer)
+
+Calculate annual German income tax (Einkommensteuer) and solidarity surcharge (Solidaritätszuschlag) in JavaScript and TypeScript. Supply annual taxable income (zu versteuerndes Einkommen, zvE) in euros, with single or joint assessment (Ehegattensplitting). Built-in final annual tariffs cover 2021-2026; calculations use decimal arithmetic and run offline.
+
+ES modules with TypeScript declarations. For Node.js runtime requirements, see the `engines` field in [package.json](https://github.com/kt-npm-modules/income-tax/blob/main/package.json).
 
 **Taxable income is not gross salary.** This library calculates tariff tax from an already determined zvE, not payroll withholding or net salary.
 
