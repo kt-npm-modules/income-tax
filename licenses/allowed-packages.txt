@@ -1,0 +1,2 @@
+# CC-BY-3.0: SPDX exception-name data used by the license parser.
+spdx-exceptions@*

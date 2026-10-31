@@ -1,15 +1,16 @@
-import Decimal from 'decimal.js';
-import { DESolidaritySurchargeYearParamsV2021 } from './solidarity-params.js';
+import { Decimal } from 'decimal.js';
+import type { DESolidaritySurchargeYearParamsV2021 } from './solidarity-params.js';
 
 export function calculateSolidaritySurcharge(
 	incomeTax: number,
-	params: DESolidaritySurchargeYearParamsV2021
+	params: DESolidaritySurchargeYearParamsV2021,
+	split = false
 ): Decimal {
-	if (incomeTax <= params.zeroBoundary) {
-		return new Decimal(0); // No solidarity surcharge below the zero boundary
-	} else if (incomeTax <= params.mitigationZoneBoundary) {
-		return new Decimal(incomeTax).minus(params.zeroBoundary).mul(params.mitigationZoneRate); // Apply the mitigation zone rate
-	} else {
-		return new Decimal(incomeTax).mul(0.055); // Apply the standard rate of 5.5%
+	const tax = new Decimal(incomeTax);
+	const exemption = new Decimal(params.exemption).mul(split ? 2 : 1);
+	if (tax.lte(exemption)) {
+		return new Decimal(0);
 	}
+	// SolzG section 4 caps the surcharge; no rounded crossover boundary is needed.
+	return Decimal.min(tax.mul(params.rate), tax.minus(exemption).mul(params.mitigationRate));
 }

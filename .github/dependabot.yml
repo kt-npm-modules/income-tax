@@ -5,19 +5,31 @@
 
 version: 2
 updates:
-  - package-ecosystem: 'npm' # See documentation for possible values
-    directory: '/' # Location of package manifests
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
       interval: 'weekly'
-      time: '02:18'
+      time: '03:47'
       timezone: 'Europe/Berlin'
+    versioning-strategy: increase
+
     ignore:
+      - dependency-name: 'typescript'
+        versions: ['>=7.0.0']
       - dependency-name: 'npm'
         versions: ['<10.0.0', '>=11.0.0']
+
     groups:
-      all:
-        patterns:
-          - '*'
+      minor-and-patch:
+        update-types:
+          - 'minor'
+          - 'patch'
+
+      major:
+        update-types:
+          - 'major'
+        group-by: dependency-name
+
     commit-message:
       prefix: 'dependabot'
       prefix-development: 'dependabot'

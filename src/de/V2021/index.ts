@@ -1,80 +1,125 @@
 import assert from '@ktarmyshov/assert';
-import Decimal from 'decimal.js';
-import { defaultDETaxOptions, DEIncome, DEIncomeTax, DETaxOptions } from '../types.js';
-import { deIncomeTaxSupportedYearsParamsV2021 } from './income-params.js';
+import { Decimal } from 'decimal.js';
+import type { DEIncome, DEIncomeTax } from '../_common/types.js';
+import { defaultDETaxOptions } from '../types.js';
 import { calculateIncomeTaxYear } from './income.js';
-import { deSolidaritySurchargeSupportedYearsParamsV2021 } from './solidarity-params.js';
 import { calculateSolidaritySurcharge } from './solidarity.js';
+import {
+	deSupportedTaxParametersV2021,
+	type DEIncomeTaxOptionsV2021,
+	type DEIncomeTaxParametersV2021,
+	type DEIncomeTaxSupportedYearsV2021
+} from './types.js';
 
-export { deIncomeTaxSupportedYearsParamsV2021 } from './income-params.js';
-export { deSolidaritySurchargeSupportedYearsParamsV2021 } from './solidarity-params.js';
+function validateParameters(parameters: DEIncomeTaxParametersV2021): void {
+	assert.ok(
+		parameters?.version === 'V2021' && parameters.income && parameters.solidarity,
+		'Expected V2021 income tax and solidarity parameters'
+	);
+	const { income, solidarity } = parameters;
+	const { basicAllowance, firstProgression, secondProgression, firstLinear, secondLinear } = income;
+	for (const formula of [firstProgression, secondProgression, firstLinear, secondLinear]) {
+		assert.ok(formula && typeof formula === 'object', 'Missing income tax formula parameters');
+	}
+	const boundaries = [
+		basicAllowance,
+		firstProgression.upperBoundary,
+		secondProgression.upperBoundary,
+		firstLinear.upperBoundary
+	];
+	assert.ok(
+		boundaries.every(
+			(value, index) =>
+				Number.isSafeInteger(value) && value >= 0 && (index === 0 || value > boundaries[index - 1])
+		),
+		'Tariff boundaries must be increasing non-negative safe integers'
+	);
+	const coefficients = [
+		firstProgression.quadraticCoefficient,
+		firstProgression.linearCoefficient,
+		secondProgression.quadraticCoefficient,
+		secondProgression.linearCoefficient,
+		secondProgression.constant,
+		firstLinear.subtrahend,
+		secondLinear.subtrahend
+	];
+	assert.ok(
+		coefficients.every((value) => Number.isFinite(value) && value >= 0),
+		'Tariff coefficients, constants, and subtrahends must be finite non-negative numbers'
+	);
+	const rates = [firstLinear.rate, secondLinear.rate, solidarity.rate, solidarity.mitigationRate];
+	assert.ok(
+		rates.every((value) => Number.isFinite(value) && value >= 0 && value <= 1),
+		'Tax and solidarity rates must be finite fractions between 0 and 1'
+	);
+	assert.ok(
+		Number.isFinite(solidarity.exemption) && solidarity.exemption >= 0,
+		'The solidarity exemption must be a finite non-negative number'
+	);
+}
 
 /**
- * Calculate the income tax for Germany for the year 2021.
- * @param year - The year for which to calculate the income tax.
- * @param income - The income object containing taxable income and other properties.
- * @param options - Optional parameters for the tax calculation.
- * @returns An object containing the calculated taxes, rates, solidarity surcharge, and total tax.
+ * Calculate annual German income tax using the V2021 tariff model.
+ * @param income - Annual taxable income (zvE) in euros; combined income for splitting.
+ * @param parameters - A supported year or a complete set of V2021 tariff parameters.
+ * @param options - Assessment options, including joint assessment via splitting.
  */
 export function deIncomeTaxV2021(
-	year: number,
 	income: DEIncome,
-	options?: DETaxOptions
+	parameters: DEIncomeTaxSupportedYearsV2021 | DEIncomeTaxParametersV2021,
+	options?: DEIncomeTaxOptionsV2021
 ): DEIncomeTax {
-	// assert.ok(income.progression === undefined, 'Progression is not supported yet');
-	// assert.ok(options?.church === undefined, 'Church tax is not supported yet');
-
-	// Validate inputs
-	assert.ok(Number.isInteger(year), 'Year must be an integer');
-	assert.ok(year >= 2021, 'Year must be 2021 or later');
-	assert.ok(income.taxable >= 0, 'Income must be a non-negative number');
-
-	// Prepare options
-	const opts = { ...defaultDETaxOptions, ...options };
-	// Calculate the income tax
-	const yearParams = options?.incomeTaxParams ?? deIncomeTaxSupportedYearsParamsV2021[year];
-	assert.ok(yearParams, `Cannot find income tax parameters for year ${year}`);
-	// If split is true, divide the income by 2, TODO: handle progression income
-	const incomeValue = new Decimal(opts.split ? income.taxable / 2 : income.taxable).floor(); // Floor down the income to the nearest integer
-	const incomeTax = calculateIncomeTaxYear(incomeValue.toNumber(), yearParams);
-	const incomeTaxRawValue = incomeTax.tax;
-	const floorIncomeTaxRaw = incomeTaxRawValue.floor(); // Floor down the tax to the nearest integer
-	const floorIncomeTax = opts.split ? floorIncomeTaxRaw.mul(2) : floorIncomeTaxRaw; // If split, multiply by 2
-	const marginalTaxRate = incomeTax.marginalTaxRate; // Marginal tax rate is already calculated
-	const outMarginalTaxRate = marginalTaxRate.toDecimalPlaces(4, Decimal.ROUND_FLOOR); // Round down to 4 decimal places
-	const averageTaxRate = income.taxable > 0 ? floorIncomeTax.div(income.taxable) : new Decimal(0); // Average tax rate is the total tax divided by the income
-	const outAverageTaxRate = averageTaxRate.toDecimalPlaces(4); // Round to 4 decimal places
-	// Calculate solidarity surcharge if applicable
-	const solidarityParams =
-		opts.solidaritySurchargeParams ?? deSolidaritySurchargeSupportedYearsParamsV2021[year];
-	assert.ok(solidarityParams, `Cannot find solidarity surcharge parameters for year ${year}`);
-	const solidaritySurchargeRaw = calculateSolidaritySurcharge(
-		floorIncomeTaxRaw.toNumber(),
-		solidarityParams
+	assert.ok(
+		Number.isFinite(income?.taxable) &&
+			income.taxable >= 0 &&
+			income.taxable <= Number.MAX_SAFE_INTEGER,
+		'Taxable income must be a finite non-negative number no greater than Number.MAX_SAFE_INTEGER'
 	);
-	// Floor to the 2 decimal places
-	const solidaritySurcharge = opts.split ? solidaritySurchargeRaw.mul(2) : solidaritySurchargeRaw;
-	const floorSolidaritySurcharge = solidaritySurcharge.toDecimalPlaces(2, Decimal.ROUND_FLOOR); // Round down to 2 decimal places
-	const solidarityRate =
-		income.taxable > 0 ? floorSolidaritySurcharge.div(income.taxable) : new Decimal(0);
-	const outSolidarityRate = solidarityRate.toDecimalPlaces(4); // Round to 4 decimal places
+	if (typeof parameters === 'number') {
+		assert.ok(
+			Object.hasOwn(deSupportedTaxParametersV2021, parameters),
+			`Unsupported tax year: ${parameters}`
+		);
+	}
+	const taxParams =
+		typeof parameters === 'number' ? deSupportedTaxParametersV2021[parameters] : parameters;
+	validateParameters(taxParams);
+	const opts = { ...defaultDETaxOptions, ...options };
+	const split = opts.split ?? false;
+	assert.ok(typeof split === 'boolean', 'The split option must be a boolean');
 
-	// Calculate total tax
-	const floorTotalTax = floorIncomeTax.plus(floorSolidaritySurcharge);
-	const outTotalTaxRate = averageTaxRate.plus(outSolidarityRate).toDecimalPlaces(4); // Round to 4 decimal places
+	const taxable = new Decimal(income.taxable);
+	// Section 32a EStG: apply the tariff to whole-euro income; floor the tax
+	// before doubling it for joint assessment.
+	const tariffIncome = taxable.div(split ? 2 : 1).floor();
+	const incomeTax = calculateIncomeTaxYear(tariffIncome.toNumber(), taxParams.income);
+	const assessedIncomeTax = incomeTax.tax.floor().mul(split ? 2 : 1);
+	// Apply SolzG to the full assessment with the matching single/joint exemption.
+	// Fractions of a cent are discarded only after calculating the surcharge.
+	const solidarity = calculateSolidaritySurcharge(
+		assessedIncomeTax.toNumber(),
+		taxParams.solidarity,
+		split
+	).toDecimalPlaces(2, Decimal.ROUND_FLOOR);
+	const total = assessedIncomeTax.plus(solidarity);
+	const rate = (amount: Decimal): number =>
+		taxable.isZero() ? 0 : amount.div(taxable).toDecimalPlaces(4, Decimal.ROUND_HALF_UP).toNumber();
+
+	const incomeAverage = rate(assessedIncomeTax);
+	const solidarityRate = rate(solidarity);
+	// Match BMF's displayed total: add the rounded component rates exactly.
+	const totalRate = new Decimal(incomeAverage).plus(solidarityRate).toNumber();
+
 	return {
-		income: floorIncomeTax.toNumber(),
+		income: assessedIncomeTax.toNumber(),
+		solidarity: solidarity.toNumber(),
+		total: total.toNumber(),
 		rates: {
-			// Floor to the 4th decimal place
-			incomeMarginal: outMarginalTaxRate.toNumber(),
-			// Round to the 4th decimal place
-			incomeAverage: outAverageTaxRate.toNumber(),
-			// Round to the 4th decimal place
-			solidarity: outSolidarityRate.toNumber(),
-			// Round to the 4th decimal place
-			total: outTotalTaxRate.toNumber()
-		},
-		solidarity: floorSolidaritySurcharge.toNumber(),
-		total: floorTotalTax.toNumber()
+			// Analytic income-tax marginal rate, truncated to four decimal places.
+			incomeMarginal: incomeTax.marginalTaxRate.toDecimalPlaces(4, Decimal.ROUND_FLOOR).toNumber(),
+			incomeAverage,
+			solidarity: solidarityRate,
+			total: totalRate
+		}
 	};
 }

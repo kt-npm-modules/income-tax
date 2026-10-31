@@ -1,0 +1,2196 @@
+{
+	"source": "https://www.bmf-steuerrechner.de/ekst/eingabeformekst.xhtml",
+	"year": 2025,
+	"records": [
+		{
+			"input": { "id": "2025-single-0.00", "year": 2025, "taxable": 0, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:34.779Z"
+		},
+		{
+			"input": { "id": "2025-single-0.01", "year": 2025, "taxable": 0.01, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:35.285Z"
+		},
+		{
+			"input": { "id": "2025-single-0.99", "year": 2025, "taxable": 0.99, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:35.803Z"
+		},
+		{
+			"input": { "id": "2025-single-1.00", "year": 2025, "taxable": 1, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:36.325Z"
+		},
+		{
+			"input": { "id": "2025-single-6048.00", "year": 2025, "taxable": 6048, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:36.849Z"
+		},
+		{
+			"input": { "id": "2025-single-12092.00", "year": 2025, "taxable": 12092, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:37.373Z"
+		},
+		{
+			"input": { "id": "2025-single-12093.00", "year": 2025, "taxable": 12093, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:37.905Z"
+		},
+		{
+			"input": { "id": "2025-single-12094.00", "year": 2025, "taxable": 12094, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:38.426Z"
+		},
+		{
+			"input": { "id": "2025-single-12095.00", "year": 2025, "taxable": 12095, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:38.954Z"
+		},
+		{
+			"input": { "id": "2025-single-12096.00", "year": 2025, "taxable": 12096, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:39.485Z"
+		},
+		{
+			"input": { "id": "2025-single-12096.99", "year": 2025, "taxable": 12096.99, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:40.003Z"
+		},
+		{
+			"input": { "id": "2025-single-12097.00", "year": 2025, "taxable": 12097, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0.14, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:40.521Z"
+		},
+		{
+			"input": { "id": "2025-single-12097.01", "year": 2025, "taxable": 12097.01, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0.14, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:41.052Z"
+		},
+		{
+			"input": { "id": "2025-single-12098.00", "year": 2025, "taxable": 12098, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0.14, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:41.580Z"
+		},
+		{
+			"input": { "id": "2025-single-12099.00", "year": 2025, "taxable": 12099, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0.14, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:42.100Z"
+		},
+		{
+			"input": { "id": "2025-single-12100.00", "year": 2025, "taxable": 12100, "split": false },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0.14, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:02:42.619Z"
+		},
+		{
+			"input": { "id": "2025-single-14769.00", "year": 2025, "taxable": 14769, "split": false },
+			"expected": {
+				"income": 440,
+				"solidarity": 0,
+				"total": 440,
+				"rates": {
+					"incomeAverage": 0.0298,
+					"incomeMarginal": 0.1898,
+					"solidarity": 0,
+					"total": 0.0298
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:43.156Z"
+		},
+		{
+			"input": { "id": "2025-single-17439.00", "year": 2025, "taxable": 17439, "split": false },
+			"expected": {
+				"income": 1014,
+				"solidarity": 0,
+				"total": 1014,
+				"rates": {
+					"incomeAverage": 0.0581,
+					"incomeMarginal": 0.2396,
+					"solidarity": 0,
+					"total": 0.0581
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:43.668Z"
+		},
+		{
+			"input": { "id": "2025-single-17440.00", "year": 2025, "taxable": 17440, "split": false },
+			"expected": {
+				"income": 1014,
+				"solidarity": 0,
+				"total": 1014,
+				"rates": {
+					"incomeAverage": 0.0581,
+					"incomeMarginal": 0.2396,
+					"solidarity": 0,
+					"total": 0.0581
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:44.210Z"
+		},
+		{
+			"input": { "id": "2025-single-17441.00", "year": 2025, "taxable": 17441, "split": false },
+			"expected": {
+				"income": 1014,
+				"solidarity": 0,
+				"total": 1014,
+				"rates": {
+					"incomeAverage": 0.0581,
+					"incomeMarginal": 0.2396,
+					"solidarity": 0,
+					"total": 0.0581
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:44.721Z"
+		},
+		{
+			"input": { "id": "2025-single-17442.00", "year": 2025, "taxable": 17442, "split": false },
+			"expected": {
+				"income": 1014,
+				"solidarity": 0,
+				"total": 1014,
+				"rates": {
+					"incomeAverage": 0.0581,
+					"incomeMarginal": 0.2396,
+					"solidarity": 0,
+					"total": 0.0581
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:45.246Z"
+		},
+		{
+			"input": { "id": "2025-single-17443.00", "year": 2025, "taxable": 17443, "split": false },
+			"expected": {
+				"income": 1015,
+				"solidarity": 0,
+				"total": 1015,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:45.763Z"
+		},
+		{
+			"input": { "id": "2025-single-17443.99", "year": 2025, "taxable": 17443.99, "split": false },
+			"expected": {
+				"income": 1015,
+				"solidarity": 0,
+				"total": 1015,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:46.289Z"
+		},
+		{
+			"input": { "id": "2025-single-17444.00", "year": 2025, "taxable": 17444, "split": false },
+			"expected": {
+				"income": 1015,
+				"solidarity": 0,
+				"total": 1015,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:46.820Z"
+		},
+		{
+			"input": { "id": "2025-single-17444.01", "year": 2025, "taxable": 17444.01, "split": false },
+			"expected": {
+				"income": 1015,
+				"solidarity": 0,
+				"total": 1015,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:47.348Z"
+		},
+		{
+			"input": { "id": "2025-single-17445.00", "year": 2025, "taxable": 17445, "split": false },
+			"expected": {
+				"income": 1015,
+				"solidarity": 0,
+				"total": 1015,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:47.877Z"
+		},
+		{
+			"input": { "id": "2025-single-17446.00", "year": 2025, "taxable": 17446, "split": false },
+			"expected": {
+				"income": 1015,
+				"solidarity": 0,
+				"total": 1015,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:48.387Z"
+		},
+		{
+			"input": { "id": "2025-single-17447.00", "year": 2025, "taxable": 17447, "split": false },
+			"expected": {
+				"income": 1016,
+				"solidarity": 0,
+				"total": 1016,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:48.925Z"
+		},
+		{
+			"input": { "id": "2025-single-17480.00", "year": 2025, "taxable": 17480, "split": false },
+			"expected": {
+				"income": 1024,
+				"solidarity": 0,
+				"total": 1024,
+				"rates": {
+					"incomeAverage": 0.0586,
+					"incomeMarginal": 0.2398,
+					"solidarity": 0,
+					"total": 0.0586
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:49.452Z"
+		},
+		{
+			"input": { "id": "2025-single-17684.00", "year": 2025, "taxable": 17684, "split": false },
+			"expected": {
+				"income": 1073,
+				"solidarity": 0,
+				"total": 1073,
+				"rates": {
+					"incomeAverage": 0.0607,
+					"incomeMarginal": 0.2405,
+					"solidarity": 0,
+					"total": 0.0607
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:49.968Z"
+		},
+		{
+			"input": { "id": "2025-single-17792.00", "year": 2025, "taxable": 17792, "split": false },
+			"expected": {
+				"income": 1099,
+				"solidarity": 0,
+				"total": 1099,
+				"rates": {
+					"incomeAverage": 0.0618,
+					"incomeMarginal": 0.2409,
+					"solidarity": 0,
+					"total": 0.0618
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:50.495Z"
+		},
+		{
+			"input": { "id": "2025-single-42961.00", "year": 2025, "taxable": 42961, "split": false },
+			"expected": {
+				"income": 8282,
+				"solidarity": 0,
+				"total": 8282,
+				"rates": {
+					"incomeAverage": 0.1928,
+					"incomeMarginal": 0.3298,
+					"solidarity": 0,
+					"total": 0.1928
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:51.011Z"
+		},
+		{
+			"input": { "id": "2025-single-50000.00", "year": 2025, "taxable": 50000, "split": false },
+			"expected": {
+				"income": 10691,
+				"solidarity": 0,
+				"total": 10691,
+				"rates": {
+					"incomeAverage": 0.2138,
+					"incomeMarginal": 0.3547,
+					"solidarity": 0,
+					"total": 0.2138
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:51.547Z"
+		},
+		{
+			"input": { "id": "2025-single-50000.99", "year": 2025, "taxable": 50000.99, "split": false },
+			"expected": {
+				"income": 10691,
+				"solidarity": 0,
+				"total": 10691,
+				"rates": {
+					"incomeAverage": 0.2138,
+					"incomeMarginal": 0.3547,
+					"solidarity": 0,
+					"total": 0.2138
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:52.061Z"
+		},
+		{
+			"input": { "id": "2025-single-68476.00", "year": 2025, "taxable": 68476, "split": false },
+			"expected": {
+				"income": 17848,
+				"solidarity": 0,
+				"total": 17848,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.4199,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:52.584Z"
+		},
+		{
+			"input": { "id": "2025-single-68477.00", "year": 2025, "taxable": 68477, "split": false },
+			"expected": {
+				"income": 17848,
+				"solidarity": 0,
+				"total": 17848,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.4199,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:53.110Z"
+		},
+		{
+			"input": { "id": "2025-single-68478.00", "year": 2025, "taxable": 68478, "split": false },
+			"expected": {
+				"income": 17848,
+				"solidarity": 0,
+				"total": 17848,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.4199,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:53.626Z"
+		},
+		{
+			"input": { "id": "2025-single-68479.00", "year": 2025, "taxable": 68479, "split": false },
+			"expected": {
+				"income": 17849,
+				"solidarity": 0,
+				"total": 17849,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.4199,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:54.154Z"
+		},
+		{
+			"input": { "id": "2025-single-68480.00", "year": 2025, "taxable": 68480, "split": false },
+			"expected": {
+				"income": 17849,
+				"solidarity": 0,
+				"total": 17849,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:54.675Z"
+		},
+		{
+			"input": { "id": "2025-single-68480.99", "year": 2025, "taxable": 68480.99, "split": false },
+			"expected": {
+				"income": 17849,
+				"solidarity": 0,
+				"total": 17849,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:55.215Z"
+		},
+		{
+			"input": { "id": "2025-single-68481.00", "year": 2025, "taxable": 68481, "split": false },
+			"expected": {
+				"income": 17850,
+				"solidarity": 0,
+				"total": 17850,
+				"rates": {
+					"incomeAverage": 0.2607,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2607
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:55.731Z"
+		},
+		{
+			"input": { "id": "2025-single-68481.01", "year": 2025, "taxable": 68481.01, "split": false },
+			"expected": {
+				"income": 17850,
+				"solidarity": 0,
+				"total": 17850,
+				"rates": {
+					"incomeAverage": 0.2607,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2607
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:56.253Z"
+		},
+		{
+			"input": { "id": "2025-single-68482.00", "year": 2025, "taxable": 68482, "split": false },
+			"expected": {
+				"income": 17850,
+				"solidarity": 0,
+				"total": 17850,
+				"rates": {
+					"incomeAverage": 0.2607,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2607
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:56.777Z"
+		},
+		{
+			"input": { "id": "2025-single-68483.00", "year": 2025, "taxable": 68483, "split": false },
+			"expected": {
+				"income": 17850,
+				"solidarity": 0,
+				"total": 17850,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:57.295Z"
+		},
+		{
+			"input": { "id": "2025-single-68484.00", "year": 2025, "taxable": 68484, "split": false },
+			"expected": {
+				"income": 17851,
+				"solidarity": 0,
+				"total": 17851,
+				"rates": {
+					"incomeAverage": 0.2607,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2607
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:57.827Z"
+		},
+		{
+			"input": { "id": "2025-single-73480.00", "year": 2025, "taxable": 73480, "split": false },
+			"expected": {
+				"income": 19949,
+				"solidarity": 0,
+				"total": 19949,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:58.351Z"
+		},
+		{
+			"input": { "id": "2025-single-73481.00", "year": 2025, "taxable": 73481, "split": false },
+			"expected": {
+				"income": 19950,
+				"solidarity": 0,
+				"total": 19950,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:58.872Z"
+		},
+		{
+			"input": { "id": "2025-single-73482.00", "year": 2025, "taxable": 73482, "split": false },
+			"expected": {
+				"income": 19950,
+				"solidarity": 0,
+				"total": 19950,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:59.400Z"
+		},
+		{
+			"input": { "id": "2025-single-73483.00", "year": 2025, "taxable": 73483, "split": false },
+			"expected": {
+				"income": 19950,
+				"solidarity": 0,
+				"total": 19950,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:02:59.916Z"
+		},
+		{
+			"input": { "id": "2025-single-73484.00", "year": 2025, "taxable": 73484, "split": false },
+			"expected": {
+				"income": 19951,
+				"solidarity": 0.11,
+				"total": 19951.11,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:00.444Z"
+		},
+		{
+			"input": { "id": "2025-single-73485.00", "year": 2025, "taxable": 73485, "split": false },
+			"expected": {
+				"income": 19951,
+				"solidarity": 0.11,
+				"total": 19951.11,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:00.972Z"
+		},
+		{
+			"input": { "id": "2025-single-73486.00", "year": 2025, "taxable": 73486, "split": false },
+			"expected": {
+				"income": 19952,
+				"solidarity": 0.23,
+				"total": 19952.23,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:01.489Z"
+		},
+		{
+			"input": { "id": "2025-single-73487.00", "year": 2025, "taxable": 73487, "split": false },
+			"expected": {
+				"income": 19952,
+				"solidarity": 0.23,
+				"total": 19952.23,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:02.021Z"
+		},
+		{
+			"input": { "id": "2025-single-73488.00", "year": 2025, "taxable": 73488, "split": false },
+			"expected": {
+				"income": 19953,
+				"solidarity": 0.35,
+				"total": 19953.35,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:02.537Z"
+		},
+		{
+			"input": { "id": "2025-single-114299.00", "year": 2025, "taxable": 114299, "split": false },
+			"expected": {
+				"income": 37093,
+				"solidarity": 2040.01,
+				"total": 39133.01,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:03.072Z"
+		},
+		{
+			"input": { "id": "2025-single-114300.00", "year": 2025, "taxable": 114300, "split": false },
+			"expected": {
+				"income": 37094,
+				"solidarity": 2040.13,
+				"total": 39134.13,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:03.598Z"
+		},
+		{
+			"input": { "id": "2025-single-114301.00", "year": 2025, "taxable": 114301, "split": false },
+			"expected": {
+				"income": 37094,
+				"solidarity": 2040.13,
+				"total": 39134.13,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:04.121Z"
+		},
+		{
+			"input": { "id": "2025-single-114302.00", "year": 2025, "taxable": 114302, "split": false },
+			"expected": {
+				"income": 37094,
+				"solidarity": 2040.13,
+				"total": 39134.13,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:04.784Z"
+		},
+		{
+			"input": { "id": "2025-single-114303.00", "year": 2025, "taxable": 114303, "split": false },
+			"expected": {
+				"income": 37095,
+				"solidarity": 2040.22,
+				"total": 39135.22,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:05.315Z"
+		},
+		{
+			"input": { "id": "2025-single-114304.00", "year": 2025, "taxable": 114304, "split": false },
+			"expected": {
+				"income": 37095,
+				"solidarity": 2040.22,
+				"total": 39135.22,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:05.851Z"
+		},
+		{
+			"input": { "id": "2025-single-114305.00", "year": 2025, "taxable": 114305, "split": false },
+			"expected": {
+				"income": 37096,
+				"solidarity": 2040.28,
+				"total": 39136.28,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:06.387Z"
+		},
+		{
+			"input": { "id": "2025-single-114306.00", "year": 2025, "taxable": 114306, "split": false },
+			"expected": {
+				"income": 37096,
+				"solidarity": 2040.28,
+				"total": 39136.28,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:06.903Z"
+		},
+		{
+			"input": { "id": "2025-single-114307.00", "year": 2025, "taxable": 114307, "split": false },
+			"expected": {
+				"income": 37097,
+				"solidarity": 2040.33,
+				"total": 39137.33,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:07.412Z"
+		},
+		{
+			"input": { "id": "2025-single-173152.00", "year": 2025, "taxable": 173152, "split": false },
+			"expected": {
+				"income": 61811,
+				"solidarity": 3399.6,
+				"total": 65210.6,
+				"rates": {
+					"incomeAverage": 0.357,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0196,
+					"total": 0.3766
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:07.932Z"
+		},
+		{
+			"input": { "id": "2025-single-277821.00", "year": 2025, "taxable": 277821, "split": false },
+			"expected": {
+				"income": 105772,
+				"solidarity": 5817.46,
+				"total": 111589.46,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:08.463Z"
+		},
+		{
+			"input": { "id": "2025-single-277822.00", "year": 2025, "taxable": 277822, "split": false },
+			"expected": {
+				"income": 105773,
+				"solidarity": 5817.51,
+				"total": 111590.51,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:08.993Z"
+		},
+		{
+			"input": { "id": "2025-single-277823.00", "year": 2025, "taxable": 277823, "split": false },
+			"expected": {
+				"income": 105773,
+				"solidarity": 5817.51,
+				"total": 111590.51,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:09.511Z"
+		},
+		{
+			"input": { "id": "2025-single-277824.00", "year": 2025, "taxable": 277824, "split": false },
+			"expected": {
+				"income": 105774,
+				"solidarity": 5817.57,
+				"total": 111591.57,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:10.049Z"
+		},
+		{
+			"input": { "id": "2025-single-277825.00", "year": 2025, "taxable": 277825, "split": false },
+			"expected": {
+				"income": 105774,
+				"solidarity": 5817.57,
+				"total": 111591.57,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:10.563Z"
+		},
+		{
+			"input": {
+				"id": "2025-single-277825.99",
+				"year": 2025,
+				"taxable": 277825.99,
+				"split": false
+			},
+			"expected": {
+				"income": 105774,
+				"solidarity": 5817.57,
+				"total": 111591.57,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:11.090Z"
+		},
+		{
+			"input": { "id": "2025-single-277826.00", "year": 2025, "taxable": 277826, "split": false },
+			"expected": {
+				"income": 105775,
+				"solidarity": 5817.62,
+				"total": 111592.62,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:11.751Z"
+		},
+		{
+			"input": {
+				"id": "2025-single-277826.01",
+				"year": 2025,
+				"taxable": 277826.01,
+				"split": false
+			},
+			"expected": {
+				"income": 105775,
+				"solidarity": 5817.62,
+				"total": 111592.62,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:12.307Z"
+		},
+		{
+			"input": { "id": "2025-single-277827.00", "year": 2025, "taxable": 277827, "split": false },
+			"expected": {
+				"income": 105775,
+				"solidarity": 5817.62,
+				"total": 111592.62,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:12.827Z"
+		},
+		{
+			"input": { "id": "2025-single-277828.00", "year": 2025, "taxable": 277828, "split": false },
+			"expected": {
+				"income": 105775,
+				"solidarity": 5817.62,
+				"total": 111592.62,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:13.340Z"
+		},
+		{
+			"input": { "id": "2025-single-277829.00", "year": 2025, "taxable": 277829, "split": false },
+			"expected": {
+				"income": 105776,
+				"solidarity": 5817.68,
+				"total": 111593.68,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:13.874Z"
+		},
+		{
+			"input": { "id": "2025-single-500000.00", "year": 2025, "taxable": 500000, "split": false },
+			"expected": {
+				"income": 205753,
+				"solidarity": 11316.41,
+				"total": 217069.41,
+				"rates": {
+					"incomeAverage": 0.4115,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0226,
+					"total": 0.4341
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:14.397Z"
+		},
+		{
+			"input": { "id": "2025-single-1000000.00", "year": 2025, "taxable": 1000000, "split": false },
+			"expected": {
+				"income": 430753,
+				"solidarity": 23691.41,
+				"total": 454444.41,
+				"rates": {
+					"incomeAverage": 0.4308,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0237,
+					"total": 0.4545
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:14.931Z"
+		},
+		{
+			"input": { "id": "2025-split-0.00", "year": 2025, "taxable": 0, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:15.450Z"
+		},
+		{
+			"input": { "id": "2025-split-0.01", "year": 2025, "taxable": 0.01, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:15.976Z"
+		},
+		{
+			"input": { "id": "2025-split-0.99", "year": 2025, "taxable": 0.99, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:16.522Z"
+		},
+		{
+			"input": { "id": "2025-split-1.00", "year": 2025, "taxable": 1, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:17.039Z"
+		},
+		{
+			"input": { "id": "2025-split-12096.00", "year": 2025, "taxable": 12096, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:17.557Z"
+		},
+		{
+			"input": { "id": "2025-split-24188.00", "year": 2025, "taxable": 24188, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:18.086Z"
+		},
+		{
+			"input": { "id": "2025-split-24189.00", "year": 2025, "taxable": 24189, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:18.606Z"
+		},
+		{
+			"input": { "id": "2025-split-24190.00", "year": 2025, "taxable": 24190, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:19.140Z"
+		},
+		{
+			"input": { "id": "2025-split-24191.00", "year": 2025, "taxable": 24191, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:19.666Z"
+		},
+		{
+			"input": { "id": "2025-split-24192.00", "year": 2025, "taxable": 24192, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:20.185Z"
+		},
+		{
+			"input": { "id": "2025-split-24192.99", "year": 2025, "taxable": 24192.99, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:20.722Z"
+		},
+		{
+			"input": { "id": "2025-split-24193.00", "year": 2025, "taxable": 24193, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:21.353Z"
+		},
+		{
+			"input": { "id": "2025-split-24193.01", "year": 2025, "taxable": 24193.01, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:21.938Z"
+		},
+		{
+			"input": { "id": "2025-split-24194.00", "year": 2025, "taxable": 24194, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0.14, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:22.465Z"
+		},
+		{
+			"input": { "id": "2025-split-24195.00", "year": 2025, "taxable": 24195, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0.14, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:22.990Z"
+		},
+		{
+			"input": { "id": "2025-split-24196.00", "year": 2025, "taxable": 24196, "split": true },
+			"expected": {
+				"income": 0,
+				"solidarity": 0,
+				"total": 0,
+				"rates": { "incomeAverage": 0, "incomeMarginal": 0.14, "solidarity": 0, "total": 0 }
+			},
+			"retrievedAt": "2026-10-30T20:03:23.517Z"
+		},
+		{
+			"input": { "id": "2025-split-29538.00", "year": 2025, "taxable": 29538, "split": true },
+			"expected": {
+				"income": 880,
+				"solidarity": 0,
+				"total": 880,
+				"rates": {
+					"incomeAverage": 0.0298,
+					"incomeMarginal": 0.1898,
+					"solidarity": 0,
+					"total": 0.0298
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:24.039Z"
+		},
+		{
+			"input": { "id": "2025-split-34882.00", "year": 2025, "taxable": 34882, "split": true },
+			"expected": {
+				"income": 2028,
+				"solidarity": 0,
+				"total": 2028,
+				"rates": {
+					"incomeAverage": 0.0581,
+					"incomeMarginal": 0.2396,
+					"solidarity": 0,
+					"total": 0.0581
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:24.563Z"
+		},
+		{
+			"input": { "id": "2025-split-34883.00", "year": 2025, "taxable": 34883, "split": true },
+			"expected": {
+				"income": 2028,
+				"solidarity": 0,
+				"total": 2028,
+				"rates": {
+					"incomeAverage": 0.0581,
+					"incomeMarginal": 0.2396,
+					"solidarity": 0,
+					"total": 0.0581
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:25.086Z"
+		},
+		{
+			"input": { "id": "2025-split-34884.00", "year": 2025, "taxable": 34884, "split": true },
+			"expected": {
+				"income": 2028,
+				"solidarity": 0,
+				"total": 2028,
+				"rates": {
+					"incomeAverage": 0.0581,
+					"incomeMarginal": 0.2396,
+					"solidarity": 0,
+					"total": 0.0581
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:25.608Z"
+		},
+		{
+			"input": { "id": "2025-split-34885.00", "year": 2025, "taxable": 34885, "split": true },
+			"expected": {
+				"income": 2028,
+				"solidarity": 0,
+				"total": 2028,
+				"rates": {
+					"incomeAverage": 0.0581,
+					"incomeMarginal": 0.2396,
+					"solidarity": 0,
+					"total": 0.0581
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:26.133Z"
+		},
+		{
+			"input": { "id": "2025-split-34886.00", "year": 2025, "taxable": 34886, "split": true },
+			"expected": {
+				"income": 2030,
+				"solidarity": 0,
+				"total": 2030,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:26.659Z"
+		},
+		{
+			"input": { "id": "2025-split-34886.99", "year": 2025, "taxable": 34886.99, "split": true },
+			"expected": {
+				"income": 2030,
+				"solidarity": 0,
+				"total": 2030,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:27.193Z"
+		},
+		{
+			"input": { "id": "2025-split-34887.00", "year": 2025, "taxable": 34887, "split": true },
+			"expected": {
+				"income": 2030,
+				"solidarity": 0,
+				"total": 2030,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:27.704Z"
+		},
+		{
+			"input": { "id": "2025-split-34887.01", "year": 2025, "taxable": 34887.01, "split": true },
+			"expected": {
+				"income": 2030,
+				"solidarity": 0,
+				"total": 2030,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:28.233Z"
+		},
+		{
+			"input": { "id": "2025-split-34888.00", "year": 2025, "taxable": 34888, "split": true },
+			"expected": {
+				"income": 2030,
+				"solidarity": 0,
+				"total": 2030,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:28.758Z"
+		},
+		{
+			"input": { "id": "2025-split-34889.00", "year": 2025, "taxable": 34889, "split": true },
+			"expected": {
+				"income": 2030,
+				"solidarity": 0,
+				"total": 2030,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:29.275Z"
+		},
+		{
+			"input": { "id": "2025-split-34890.00", "year": 2025, "taxable": 34890, "split": true },
+			"expected": {
+				"income": 2030,
+				"solidarity": 0,
+				"total": 2030,
+				"rates": {
+					"incomeAverage": 0.0582,
+					"incomeMarginal": 0.2397,
+					"solidarity": 0,
+					"total": 0.0582
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:29.805Z"
+		},
+		{
+			"input": { "id": "2025-split-34960.00", "year": 2025, "taxable": 34960, "split": true },
+			"expected": {
+				"income": 2048,
+				"solidarity": 0,
+				"total": 2048,
+				"rates": {
+					"incomeAverage": 0.0586,
+					"incomeMarginal": 0.2398,
+					"solidarity": 0,
+					"total": 0.0586
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:30.323Z"
+		},
+		{
+			"input": { "id": "2025-split-35368.00", "year": 2025, "taxable": 35368, "split": true },
+			"expected": {
+				"income": 2146,
+				"solidarity": 0,
+				"total": 2146,
+				"rates": {
+					"incomeAverage": 0.0607,
+					"incomeMarginal": 0.2405,
+					"solidarity": 0,
+					"total": 0.0607
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:30.852Z"
+		},
+		{
+			"input": { "id": "2025-split-35584.00", "year": 2025, "taxable": 35584, "split": true },
+			"expected": {
+				"income": 2198,
+				"solidarity": 0,
+				"total": 2198,
+				"rates": {
+					"incomeAverage": 0.0618,
+					"incomeMarginal": 0.2409,
+					"solidarity": 0,
+					"total": 0.0618
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:31.375Z"
+		},
+		{
+			"input": { "id": "2025-split-85922.00", "year": 2025, "taxable": 85922, "split": true },
+			"expected": {
+				"income": 16564,
+				"solidarity": 0,
+				"total": 16564,
+				"rates": {
+					"incomeAverage": 0.1928,
+					"incomeMarginal": 0.3298,
+					"solidarity": 0,
+					"total": 0.1928
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:31.905Z"
+		},
+		{
+			"input": { "id": "2025-split-100000.00", "year": 2025, "taxable": 100000, "split": true },
+			"expected": {
+				"income": 21382,
+				"solidarity": 0,
+				"total": 21382,
+				"rates": {
+					"incomeAverage": 0.2138,
+					"incomeMarginal": 0.3547,
+					"solidarity": 0,
+					"total": 0.2138
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:32.428Z"
+		},
+		{
+			"input": { "id": "2025-split-100001.98", "year": 2025, "taxable": 100001.98, "split": true },
+			"expected": {
+				"income": 21382,
+				"solidarity": 0,
+				"total": 21382,
+				"rates": {
+					"incomeAverage": 0.2138,
+					"incomeMarginal": 0.3547,
+					"solidarity": 0,
+					"total": 0.2138
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:33.074Z"
+		},
+		{
+			"input": { "id": "2025-split-136956.00", "year": 2025, "taxable": 136956, "split": true },
+			"expected": {
+				"income": 35696,
+				"solidarity": 0,
+				"total": 35696,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.4199,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:33.625Z"
+		},
+		{
+			"input": { "id": "2025-split-136957.00", "year": 2025, "taxable": 136957, "split": true },
+			"expected": {
+				"income": 35696,
+				"solidarity": 0,
+				"total": 35696,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.4199,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:34.219Z"
+		},
+		{
+			"input": { "id": "2025-split-136958.00", "year": 2025, "taxable": 136958, "split": true },
+			"expected": {
+				"income": 35698,
+				"solidarity": 0,
+				"total": 35698,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.4199,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:34.830Z"
+		},
+		{
+			"input": { "id": "2025-split-136959.00", "year": 2025, "taxable": 136959, "split": true },
+			"expected": {
+				"income": 35698,
+				"solidarity": 0,
+				"total": 35698,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.4199,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:35.507Z"
+		},
+		{
+			"input": { "id": "2025-split-136960.00", "year": 2025, "taxable": 136960, "split": true },
+			"expected": {
+				"income": 35698,
+				"solidarity": 0,
+				"total": 35698,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:36.091Z"
+		},
+		{
+			"input": { "id": "2025-split-136960.99", "year": 2025, "taxable": 136960.99, "split": true },
+			"expected": {
+				"income": 35698,
+				"solidarity": 0,
+				"total": 35698,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:36.621Z"
+		},
+		{
+			"input": { "id": "2025-split-136961.00", "year": 2025, "taxable": 136961, "split": true },
+			"expected": {
+				"income": 35698,
+				"solidarity": 0,
+				"total": 35698,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:37.153Z"
+		},
+		{
+			"input": { "id": "2025-split-136961.01", "year": 2025, "taxable": 136961.01, "split": true },
+			"expected": {
+				"income": 35698,
+				"solidarity": 0,
+				"total": 35698,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:37.680Z"
+		},
+		{
+			"input": { "id": "2025-split-136962.00", "year": 2025, "taxable": 136962, "split": true },
+			"expected": {
+				"income": 35700,
+				"solidarity": 0,
+				"total": 35700,
+				"rates": {
+					"incomeAverage": 0.2607,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2607
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:38.203Z"
+		},
+		{
+			"input": { "id": "2025-split-136963.00", "year": 2025, "taxable": 136963, "split": true },
+			"expected": {
+				"income": 35700,
+				"solidarity": 0,
+				"total": 35700,
+				"rates": {
+					"incomeAverage": 0.2607,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2607
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:38.728Z"
+		},
+		{
+			"input": { "id": "2025-split-136964.00", "year": 2025, "taxable": 136964, "split": true },
+			"expected": {
+				"income": 35700,
+				"solidarity": 0,
+				"total": 35700,
+				"rates": {
+					"incomeAverage": 0.2607,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2607
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:39.236Z"
+		},
+		{
+			"input": { "id": "2025-split-136966.00", "year": 2025, "taxable": 136966, "split": true },
+			"expected": {
+				"income": 35700,
+				"solidarity": 0,
+				"total": 35700,
+				"rates": {
+					"incomeAverage": 0.2606,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2606
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:39.770Z"
+		},
+		{
+			"input": { "id": "2025-split-146964.00", "year": 2025, "taxable": 146964, "split": true },
+			"expected": {
+				"income": 39900,
+				"solidarity": 0,
+				"total": 39900,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:40.285Z"
+		},
+		{
+			"input": { "id": "2025-split-146965.00", "year": 2025, "taxable": 146965, "split": true },
+			"expected": {
+				"income": 39900,
+				"solidarity": 0,
+				"total": 39900,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:40.811Z"
+		},
+		{
+			"input": { "id": "2025-split-146966.00", "year": 2025, "taxable": 146966, "split": true },
+			"expected": {
+				"income": 39900,
+				"solidarity": 0,
+				"total": 39900,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:41.338Z"
+		},
+		{
+			"input": { "id": "2025-split-146967.00", "year": 2025, "taxable": 146967, "split": true },
+			"expected": {
+				"income": 39900,
+				"solidarity": 0,
+				"total": 39900,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:41.860Z"
+		},
+		{
+			"input": { "id": "2025-split-146968.00", "year": 2025, "taxable": 146968, "split": true },
+			"expected": {
+				"income": 39902,
+				"solidarity": 0.23,
+				"total": 39902.23,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:42.383Z"
+		},
+		{
+			"input": { "id": "2025-split-146969.00", "year": 2025, "taxable": 146969, "split": true },
+			"expected": {
+				"income": 39902,
+				"solidarity": 0.23,
+				"total": 39902.23,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:42.925Z"
+		},
+		{
+			"input": { "id": "2025-split-146970.00", "year": 2025, "taxable": 146970, "split": true },
+			"expected": {
+				"income": 39902,
+				"solidarity": 0.23,
+				"total": 39902.23,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:43.437Z"
+		},
+		{
+			"input": { "id": "2025-split-146971.00", "year": 2025, "taxable": 146971, "split": true },
+			"expected": {
+				"income": 39902,
+				"solidarity": 0.23,
+				"total": 39902.23,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:43.958Z"
+		},
+		{
+			"input": { "id": "2025-split-146972.00", "year": 2025, "taxable": 146972, "split": true },
+			"expected": {
+				"income": 39904,
+				"solidarity": 0.47,
+				"total": 39904.47,
+				"rates": {
+					"incomeAverage": 0.2715,
+					"incomeMarginal": 0.42,
+					"solidarity": 0,
+					"total": 0.2715
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:44.492Z"
+		},
+		{
+			"input": { "id": "2025-split-228602.00", "year": 2025, "taxable": 228602, "split": true },
+			"expected": {
+				"income": 74188,
+				"solidarity": 4080.27,
+				"total": 78268.27,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:45.004Z"
+		},
+		{
+			"input": { "id": "2025-split-228603.00", "year": 2025, "taxable": 228603, "split": true },
+			"expected": {
+				"income": 74188,
+				"solidarity": 4080.27,
+				"total": 78268.27,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:45.559Z"
+		},
+		{
+			"input": { "id": "2025-split-228604.00", "year": 2025, "taxable": 228604, "split": true },
+			"expected": {
+				"income": 74188,
+				"solidarity": 4080.27,
+				"total": 78268.27,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:46.066Z"
+		},
+		{
+			"input": { "id": "2025-split-228605.00", "year": 2025, "taxable": 228605, "split": true },
+			"expected": {
+				"income": 74188,
+				"solidarity": 4080.27,
+				"total": 78268.27,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:46.575Z"
+		},
+		{
+			"input": { "id": "2025-split-228606.00", "year": 2025, "taxable": 228606, "split": true },
+			"expected": {
+				"income": 74190,
+				"solidarity": 4080.45,
+				"total": 78270.45,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:47.105Z"
+		},
+		{
+			"input": { "id": "2025-split-228607.00", "year": 2025, "taxable": 228607, "split": true },
+			"expected": {
+				"income": 74190,
+				"solidarity": 4080.45,
+				"total": 78270.45,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:47.629Z"
+		},
+		{
+			"input": { "id": "2025-split-228608.00", "year": 2025, "taxable": 228608, "split": true },
+			"expected": {
+				"income": 74190,
+				"solidarity": 4080.45,
+				"total": 78270.45,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:48.153Z"
+		},
+		{
+			"input": { "id": "2025-split-228609.00", "year": 2025, "taxable": 228609, "split": true },
+			"expected": {
+				"income": 74190,
+				"solidarity": 4080.45,
+				"total": 78270.45,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:48.677Z"
+		},
+		{
+			"input": { "id": "2025-split-228610.00", "year": 2025, "taxable": 228610, "split": true },
+			"expected": {
+				"income": 74192,
+				"solidarity": 4080.56,
+				"total": 78272.56,
+				"rates": {
+					"incomeAverage": 0.3245,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0178,
+					"total": 0.3423
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:49.209Z"
+		},
+		{
+			"input": { "id": "2025-split-346304.00", "year": 2025, "taxable": 346304, "split": true },
+			"expected": {
+				"income": 123622,
+				"solidarity": 6799.21,
+				"total": 130421.21,
+				"rates": {
+					"incomeAverage": 0.357,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0196,
+					"total": 0.3766
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:49.727Z"
+		},
+		{
+			"input": { "id": "2025-split-555646.00", "year": 2025, "taxable": 555646, "split": true },
+			"expected": {
+				"income": 211546,
+				"solidarity": 11635.03,
+				"total": 223181.03,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:50.253Z"
+		},
+		{
+			"input": { "id": "2025-split-555647.00", "year": 2025, "taxable": 555647, "split": true },
+			"expected": {
+				"income": 211546,
+				"solidarity": 11635.03,
+				"total": 223181.03,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:50.776Z"
+		},
+		{
+			"input": { "id": "2025-split-555648.00", "year": 2025, "taxable": 555648, "split": true },
+			"expected": {
+				"income": 211548,
+				"solidarity": 11635.14,
+				"total": 223183.14,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:51.294Z"
+		},
+		{
+			"input": { "id": "2025-split-555649.00", "year": 2025, "taxable": 555649, "split": true },
+			"expected": {
+				"income": 211548,
+				"solidarity": 11635.14,
+				"total": 223183.14,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:51.821Z"
+		},
+		{
+			"input": { "id": "2025-split-555650.00", "year": 2025, "taxable": 555650, "split": true },
+			"expected": {
+				"income": 211548,
+				"solidarity": 11635.14,
+				"total": 223183.14,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:52.348Z"
+		},
+		{
+			"input": { "id": "2025-split-555650.99", "year": 2025, "taxable": 555650.99, "split": true },
+			"expected": {
+				"income": 211548,
+				"solidarity": 11635.14,
+				"total": 223183.14,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:52.876Z"
+		},
+		{
+			"input": { "id": "2025-split-555651.00", "year": 2025, "taxable": 555651, "split": true },
+			"expected": {
+				"income": 211548,
+				"solidarity": 11635.14,
+				"total": 223183.14,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:53.396Z"
+		},
+		{
+			"input": { "id": "2025-split-555651.01", "year": 2025, "taxable": 555651.01, "split": true },
+			"expected": {
+				"income": 211548,
+				"solidarity": 11635.14,
+				"total": 223183.14,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.42,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:53.926Z"
+		},
+		{
+			"input": { "id": "2025-split-555652.00", "year": 2025, "taxable": 555652, "split": true },
+			"expected": {
+				"income": 211550,
+				"solidarity": 11635.25,
+				"total": 223185.25,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:54.439Z"
+		},
+		{
+			"input": { "id": "2025-split-555653.00", "year": 2025, "taxable": 555653, "split": true },
+			"expected": {
+				"income": 211550,
+				"solidarity": 11635.25,
+				"total": 223185.25,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:54.967Z"
+		},
+		{
+			"input": { "id": "2025-split-555654.00", "year": 2025, "taxable": 555654, "split": true },
+			"expected": {
+				"income": 211550,
+				"solidarity": 11635.25,
+				"total": 223185.25,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:55.499Z"
+		},
+		{
+			"input": { "id": "2025-split-555656.00", "year": 2025, "taxable": 555656, "split": true },
+			"expected": {
+				"income": 211550,
+				"solidarity": 11635.25,
+				"total": 223185.25,
+				"rates": {
+					"incomeAverage": 0.3807,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0209,
+					"total": 0.4016
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:56.021Z"
+		},
+		{
+			"input": { "id": "2025-split-1000000.00", "year": 2025, "taxable": 1000000, "split": true },
+			"expected": {
+				"income": 411506,
+				"solidarity": 22632.83,
+				"total": 434138.83,
+				"rates": {
+					"incomeAverage": 0.4115,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0226,
+					"total": 0.4341
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:56.543Z"
+		},
+		{
+			"input": { "id": "2025-split-2000000.00", "year": 2025, "taxable": 2000000, "split": true },
+			"expected": {
+				"income": 861506,
+				"solidarity": 47382.83,
+				"total": 908888.83,
+				"rates": {
+					"incomeAverage": 0.4308,
+					"incomeMarginal": 0.45,
+					"solidarity": 0.0237,
+					"total": 0.4545
+				}
+			},
+			"retrievedAt": "2026-10-30T20:03:57.064Z"
+		}
+	]
+}

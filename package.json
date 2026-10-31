@@ -1,6 +1,6 @@
 {
 	"name": "@ktarmyshov/income-tax",
-	"description": "A Node.js library for calculating income tax.",
+	"description": "Calculate German income tax (Einkommensteuer) and solidarity surcharge from annual taxable income (zvE), with Ehegattensplitting. TypeScript, 2021-2026.",
 	"version": "0.1.9",
 	"license": "MIT",
 	"author": {
@@ -8,11 +8,22 @@
 		"email": "k.tarmyshov@googlemail.com"
 	},
 	"keywords": [
-		"income",
-		"tax",
-		"calculator",
-		"calculate",
-		"germany"
+		"germany",
+		"german-tax",
+		"german-income-tax",
+		"income-tax",
+		"tax-calculator",
+		"einkommensteuer",
+		"einkommensteuerrechner",
+		"steuerrechner",
+		"taxable-income",
+		"zve",
+		"solidaritaetszuschlag",
+		"solidarity-surcharge",
+		"ehegattensplitting",
+		"splittingtarif",
+		"typescript",
+		"javascript"
 	],
 	"homepage": "https://github.com/kt-npm-modules/income-tax#readme",
 	"repository": {
@@ -41,43 +52,47 @@
 		"build:release": "rimraf ./dist && tsc --project tsconfig-release.json && npm run prepack",
 		"prepack": "publint",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint .",
-		"check": "tsc --skipLibCheck",
-		"check:test": "tsc --project tsconfig-test.json --skipLibCheck",
-		"test": "npm run check:test && vitest run",
-		"coverage": "vitest run --coverage",
+		"lint": "prettier --check . && eslint . && npm run lint:licenses",
+		"lint:licenses": "license-gate check",
+		"check": "tsc --project tsconfig.json --noEmit",
+		"check:test": "tsc --project tsconfig-test.json",
+		"test": "npm run build && npm run check:test && vitest run",
+		"coverage": "npm run build && npm run check:test && vitest run --coverage",
 		"changeset:version": "changeset version && npm install && git add --all",
-		"changeset:publish": "changeset publish"
+		"changeset:publish": "changeset publish",
+		"bmf:update-fixtures": "node --import tsx tests/de/bmf/update-fixtures.ts",
+		"test:bmf": "npm run build && npm run check:test && vitest run --config vitest.bmf.config.ts"
 	},
 	"files": [
 		"dist",
+		"CHANGELOG.md",
 		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*",
-		"!tests",
-		"!examples",
-		"!benchmarks"
+		"!dist/**/*.spec.*"
 	],
 	"devDependencies": {
-		"@changesets/cli": "^2.28.1",
-		"@eslint/compat": "^2.0.0",
-		"@types/node": "^25.0.2",
-		"@vitest/coverage-istanbul": "^4.0.3",
-		"eslint": "^9.22.0",
-		"eslint-config-prettier": "^10.1.2",
-		"prettier": "^3.5.3",
-		"publint": "^0.3.11",
-		"rimraf": "^6.0.1",
-		"tsc-alias": "^1.8.15",
-		"typescript": "^5.8.2",
-		"typescript-eslint": "^8.26.1",
-		"vitest": "^4.0.3"
+		"@changesets/cli": "^3.0.3",
+		"@eslint/compat": "^2.1.1",
+		"@eslint/js": "^10.0.1",
+		"@mirasen/license-gate": "^1.0.4",
+		"@types/node": "^22.20.5",
+		"@vitest/coverage-v8": "5.0.5",
+		"eslint": "^10.14.0",
+		"eslint-config-prettier": "^10.1.8",
+		"globals": "^17.13.0",
+		"prettier": "^3.9.10",
+		"publint": "^0.3.25",
+		"rimraf": "^6.1.3",
+		"tsx": "^4.23.15",
+		"typescript": "~6.0.3",
+		"typescript-eslint": "^8.72.1",
+		"vitest": "5.0.5"
 	},
 	"engines": {
-		"node": ">=20"
+		"node": ">=22.13.0"
 	},
 	"dependencies": {
-		"@ktarmyshov/assert": "^0.1.0",
+		"@ktarmyshov/assert": "^0.1.15",
 		"decimal.js": "^10.6.0",
-		"type-fest": "^5.0.1"
+		"type-fest": "^5.10.0"
 	}
 }
