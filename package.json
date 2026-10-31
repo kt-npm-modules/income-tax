@@ -1,6 +1,6 @@
 {
 	"name": "@ktarmyshov/income-tax",
-	"description": "A Node.js library for calculating income tax.",
+	"description": "Calculate German income tax (Einkommensteuer) and solidarity surcharge from annual taxable income (zvE), with Ehegattensplitting. TypeScript, 2021-2026.",
 	"version": "0.1.9",
 	"license": "MIT",
 	"author": {
@@ -8,11 +8,22 @@
 		"email": "k.tarmyshov@googlemail.com"
 	},
 	"keywords": [
-		"income",
-		"tax",
-		"calculator",
-		"calculate",
-		"germany"
+		"germany",
+		"german-tax",
+		"german-income-tax",
+		"income-tax",
+		"tax-calculator",
+		"einkommensteuer",
+		"einkommensteuerrechner",
+		"steuerrechner",
+		"taxable-income",
+		"zve",
+		"solidaritaetszuschlag",
+		"solidarity-surcharge",
+		"ehegattensplitting",
+		"splittingtarif",
+		"typescript",
+		"javascript"
 	],
 	"homepage": "https://github.com/kt-npm-modules/income-tax#readme",
 	"repository": {
