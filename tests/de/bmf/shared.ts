@@ -18,8 +18,29 @@ import type { DEIncomeTaxSupportedYears } from '../../../src/de/types.js';
 import { taxCases, isV2021Year } from './cases.js';
 import type { TaxCase } from './cases.js';
 import type { BmfExpected } from './client.js';
+import { loadFixtures, verifyFixtureProvenance } from './fixtures.js';
 
 type ExpectedProvider = (input: TaxCase) => BmfExpected | Promise<BmfExpected>;
+
+/** Suites select their version's years; metadata alone enables official comparisons. */
+export function registerOfficialFixtureTests(entry: {
+	year: DEIncomeTaxSupportedYears;
+	hasOfficialFixtures: boolean;
+}) {
+	const { year, hasOfficialFixtures } = entry;
+	if (!hasOfficialFixtures) {
+		it.skip(`${year}: no approved official BMF fixtures`);
+		return;
+	}
+	it(`${year}: complete cases and response provenance`, () => {
+		verifyFixtureProvenance(year, loadFixtures(year));
+	});
+	registerTaxCases(year, (input) => {
+		const row = loadFixtures(year).fixture.records.find((row) => row.input.id === input.id);
+		if (!row) throw new Error(`Missing BMF fixture: ${input.id}`);
+		return row.expected;
+	});
+}
 
 /** The identical assertions and inputs are used by both offline and live suites. */
 export function registerTaxCases(year: DEIncomeTaxSupportedYears, expectedFor: ExpectedProvider) {

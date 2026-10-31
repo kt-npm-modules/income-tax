@@ -1,7 +1,9 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import type * as Vitest from 'vitest';
+import type { registerTaxCases } from './shared.js';
 import { BmfClient, BmfYearUnavailableError, BMF_URL } from './client.js';
 import { discoverLiveYears, parseFixtureYear, selectFixtureYears } from './availability.js';
-import { taxCases } from './cases.js';
+import { taxCases, yearBoundaries } from './cases.js';
 import { loadFixtures } from './fixtures.js';
 
 vi.mock('node:timers/promises', () => ({ setTimeout: vi.fn().mockResolvedValue(undefined) }));
@@ -14,6 +16,10 @@ function form(years: number[]) {
 afterEach(() => {
 	vi.restoreAllMocks();
 	vi.unstubAllGlobals();
+	vi.doUnmock('vitest');
+	vi.doUnmock('./shared.js');
+	vi.doUnmock('./client.js');
+	vi.resetModules();
 });
 
 describe('BMF successful discovery and explicit availability policy', () => {
@@ -32,22 +38,25 @@ describe('BMF successful discovery and explicit availability policy', () => {
 			hasOfficialFixtures: true,
 			diagnostic: undefined
 		});
-		for (const year of [2027, 2028])
-			expect(years.find((entry) => entry.year === year)).toMatchObject({
+		for (const entry of yearBoundaries.filter((entry) => entry.year >= 2027))
+			expect(years.find((row) => row.year === entry.year)).toMatchObject({
 				available: false,
-				hasOfficialFixtures: false,
-				diagnostic: expect.stringContaining('not yet offered')
+				hasOfficialFixtures: entry.hasOfficialFixtures,
+				diagnostic: expect.stringContaining(
+					entry.hasOfficialFixtures ? 'no longer offered' : 'not yet offered'
+				)
 			});
 	});
 	it.each([2027, 2028])(
-		'automatically registers available draft year %s without stored fixtures',
+		'discovers available V2027 year %s independently of stored fixtures',
 		async (year) => {
 			const client = new BmfClient();
 			vi.spyOn(client, 'request').mockResolvedValue(form([2026, year]));
 			const discovered = await discoverLiveYears(client);
 			expect(discovered.find((entry) => entry.year === year)).toMatchObject({
 				available: true,
-				hasOfficialFixtures: false,
+				hasOfficialFixtures: yearBoundaries.find((entry) => entry.year === year)!
+					.hasOfficialFixtures,
 				diagnostic: undefined
 			});
 			expect(taxCases.filter((input) => input.year === year).length).toBeGreaterThan(150);
@@ -81,6 +90,70 @@ describe('BMF successful discovery and explicit availability policy', () => {
 		const input = taxCases.find((input) => input.year === 2028)!;
 		await expect(client.calculate(input)).rejects.toBeInstanceOf(BmfYearUnavailableError);
 		expect(request).toHaveBeenCalledTimes(2);
+	});
+});
+
+/** Collect live registrations without running comparison requests or Vitest groups. */
+async function mockLiveRegistration(html: string | Error) {
+	const vitest = await vi.importActual<typeof Vitest>('vitest');
+	const register = vi.fn<typeof registerTaxCases>();
+	const skipIf = vi.fn((skip: boolean) => (_name: string, body: () => void) => {
+		if (!skip) body();
+	});
+	const request = vi.spyOn(BmfClient.prototype, 'request');
+	if (html instanceof Error) request.mockRejectedValue(html);
+	else request.mockResolvedValue(html);
+	vi.spyOn(console, 'warn').mockImplementation(() => {});
+	vi.stubGlobal(
+		'fetch',
+		vi.fn(() => {
+			throw new Error('Unexpected unmocked BMF request');
+		})
+	);
+	vi.resetModules();
+	vi.doMock('vitest', () => ({ ...vitest, describe: { skipIf } }));
+	vi.doMock('./client.js', () => ({ BmfClient, BmfYearUnavailableError, BMF_URL }));
+	vi.doMock('./shared.js', () => ({ registerTaxCases: register }));
+	return { register, skipIf, request };
+}
+
+describe('Version-specific live suite registration (offline mocks)', () => {
+	it('V2021 never registers V2027 years, even when the form offers both versions', async () => {
+		const { register, request } = await mockLiveRegistration(form([2026, 2027, 2028]));
+		await import('../V2021-live.spec.js');
+		expect(register.mock.calls.map(([year]) => year)).toStrictEqual([2026]);
+		expect(request).toHaveBeenCalledTimes(1);
+	});
+	it('V2027 explicitly skips both unavailable years and never registers historical years', async () => {
+		const { register, skipIf } = await mockLiveRegistration(form([2026]));
+		await import('../V2027-live.spec.js');
+		expect(register).not.toHaveBeenCalled();
+		expect(skipIf.mock.calls).toStrictEqual([[true], [true]]);
+		for (const year of [2027, 2028])
+			expect(console.warn).toHaveBeenCalledWith(expect.stringContaining(`year ${year}`));
+	});
+	it('V2027 activates both years from live availability independently of stored fixtures', async () => {
+		const { register, skipIf } = await mockLiveRegistration(form([2026, 2027, 2028]));
+		await import('../V2027-live.spec.js');
+		expect(register.mock.calls.map(([year]) => year)).toStrictEqual([2027, 2028]);
+		expect(skipIf.mock.calls).toStrictEqual([[false], [false]]);
+	});
+	it.each([new Error('Network failure'), '<html>Malformed form</html>'])(
+		'V2027 discovery errors fail suite loading instead of skipping',
+		async (response) => {
+			const { register, skipIf } = await mockLiveRegistration(response);
+			await expect(import('../V2027-live.spec.js')).rejects.toThrow();
+			expect(register).not.toHaveBeenCalled();
+			expect(skipIf).not.toHaveBeenCalled();
+		}
+	);
+	it('a disappearing year fails the registered V2027 comparison provider', async () => {
+		const { register, request } = await mockLiveRegistration(form([2027]));
+		await import('../V2027-live.spec.js');
+		request.mockResolvedValue(form([2026]));
+		const [year, expectedFor] = register.mock.calls[0];
+		const input = taxCases.find((input) => input.year === year)!;
+		await expect(expectedFor(input)).rejects.toBeInstanceOf(BmfYearUnavailableError);
 	});
 });
 
@@ -150,9 +223,6 @@ describe('BMF comparison failures and session exchange', () => {
 			})
 		).toThrow();
 	});
-	it('rejects missing official fixture files rather than silently skipping', () => {
-		expect(() => loadFixtures(2027)).toThrow();
-	});
 });
 
 describe('BMF transport guards', () => {
@@ -216,9 +286,9 @@ describe('Explicit fixture capture selection (no capture performed)', () => {
 			form([2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028])
 		);
 		expect(parseFixtureYear([])).toBeUndefined();
-		expect((await selectFixtureYears(client)).map((entry) => entry.year)).toStrictEqual([
-			2021, 2022, 2023, 2024, 2025, 2026
-		]);
+		expect((await selectFixtureYears(client)).map((entry) => entry.year)).toStrictEqual(
+			yearBoundaries.filter((entry) => entry.hasOfficialFixtures).map((entry) => entry.year)
+		);
 	});
 	it('fails default capture when a historical year is no longer offered', async () => {
 		const client = new BmfClient();

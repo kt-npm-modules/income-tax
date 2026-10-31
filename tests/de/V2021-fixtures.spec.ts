@@ -8,33 +8,14 @@ import type {
 	DEIncomeTaxParametersV2021,
 	DEIncomeTaxSupportedYearsV2021
 } from '@ktarmyshov/income-tax';
-import { taxCases, yearBoundaries } from './bmf/cases.js';
-import { BMF_URL, parseBmfResult } from './bmf/client.js';
+import { taxCases, yearBoundaries, isV2021Year } from './bmf/cases.js';
+import { parseBmfResult } from './bmf/client.js';
 import { loadFixtures } from './bmf/fixtures.js';
-import { registerTaxCases } from './bmf/shared.js';
+import { registerOfficialFixtureTests } from './bmf/shared.js';
 
-describe('BMF annual income-tax fixtures', () => {
-	for (const { year } of yearBoundaries.filter((entry) => entry.hasOfficialFixtures)) {
-		it(`${year}: complete cases and response provenance`, () => {
-			const { fixture, html } = loadFixtures(year);
-			expect(fixture.source).toBe(BMF_URL);
-			expect(fixture.year).toBe(year);
-			expect(fixture.records.map((row) => row.input)).toStrictEqual(
-				taxCases.filter((input) => input.year === year)
-			);
-			expect(Object.keys(html).sort()).toStrictEqual(
-				fixture.records.map((row) => row.input.id).sort()
-			);
-			for (const row of fixture.records) {
-				expect(Number.isFinite(Date.parse(row.retrievedAt))).toBe(true);
-				expect(parseBmfResult(html[row.input.id], row.input)).toStrictEqual(row.expected);
-			}
-		});
-		registerTaxCases(year, (input) => {
-			const row = loadFixtures(year).fixture.records.find((row) => row.input.id === input.id);
-			if (!row) throw new Error(`Missing BMF fixture: ${input.id}`);
-			return row.expected;
-		});
+describe('V2021 official BMF annual income-tax fixtures', () => {
+	for (const entry of yearBoundaries.filter((entry) => isV2021Year(entry.year))) {
+		registerOfficialFixtureTests(entry);
 	}
 });
 

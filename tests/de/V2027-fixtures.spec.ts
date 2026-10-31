@@ -21,8 +21,14 @@ import {
 	draftRevision,
 	statutoryDraftExpected
 } from './draft/V2027-vectors.js';
-import { registerTaxCases } from './bmf/shared.js';
-import { taxCases, yearBoundaries } from './bmf/cases.js';
+import { registerOfficialFixtureTests, registerTaxCases } from './bmf/shared.js';
+import { isV2021Year, taxCases, yearBoundaries } from './bmf/cases.js';
+
+describe('V2027 official BMF annual income-tax fixtures', () => {
+	for (const entry of yearBoundaries.filter((entry) => !isV2021Year(entry.year))) {
+		registerOfficialFixtureTests(entry);
+	}
+});
 
 describe('V2027 independent statutory draft vectors (not BMF verified)', () => {
 	for (const year of [2027, 2028] as const) {
@@ -135,11 +141,7 @@ describe('V2027 independent statutory draft vectors (not BMF verified)', () => {
 			}
 		});
 	}
-	it('retains all 902 official historical inputs and separates draft metadata', () => {
-		expect(taxCases.filter((input) => input.year <= 2026)).toHaveLength(902);
-		expect(
-			yearBoundaries.filter((entry) => entry.hasOfficialFixtures).map((entry) => entry.year)
-		).toStrictEqual([2021, 2022, 2023, 2024, 2025, 2026]);
+	it('identifies draft metadata and covers every V2027 boundary offset', () => {
 		expect(draftRevision.status).toBe('government-draft');
 		expect(draftRevision.articles).toStrictEqual({ 2027: 1, 2028: 2 });
 		for (const year of [2027, 2028]) {
