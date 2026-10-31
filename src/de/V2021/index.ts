@@ -13,7 +13,7 @@ import {
 
 function validateParameters(parameters: DEIncomeTaxParametersV2021): void {
 	assert.ok(
-		parameters && parameters.version === 'V2021' && parameters.income && parameters.solidarity,
+		parameters?.version === 'V2021' && parameters.income && parameters.solidarity,
 		'Expected V2021 income tax and solidarity parameters'
 	);
 	const { income, solidarity } = parameters;
