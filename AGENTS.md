@@ -23,6 +23,16 @@ For the current models, these are `V2021-fixtures.spec.ts`, `V2021-live.spec.ts`
 - `V2027-live.spec.ts` contains only V2027 years and activates comparisons as each year becomes available in the BMF interface.
 - A version's suite must register only that version's years. An occasional negative test that another version's year is rejected is fine; registering another version's cases is not.
 
+## Verify generic and version-specific APIs against the same references
+
+Preserve the established V2021 testing pattern from `tests/de/bmf/shared.ts`: **every registered tax case must exercise both `deIncomeTax()` (the public dispatcher) and the matching version-specific function** (`deIncomeTaxV2021()`, `deIncomeTaxV2027()`, etc.).
+
+- Use exactly the same taxable income, assessment options, and independently obtained expected result for both calculation paths. Compare the **complete result** (tax, solidarity, total, and every reported rate) with strict equality; do not merely check that the two functions agree with each other, since both could share a defect.
+- Exercise both supported parameter forms: a tax-year number and the corresponding complete versioned parameter object.
+- Verify public imports through the package root (`.`) and `./de`, as well as direct source imports where the existing tests support them. The original V2021 helper checks three entry points × two APIs × two parameter forms for each case; retain equivalent coverage for each version.
+- Apply this parity rule to both offline reference-vector/fixture comparisons and live BMF comparisons when the reference is available. Centralize reusable assertions if helpful, but **register only the owning version's years inside each version-specific suite**.
+- Add coverage for a new tariff version by extending this same verification pattern, not by testing only the version-specific function or only the generic dispatcher.
+
 ## Shared infrastructure is not shared ownership
 
 Reusable BMF transport, parsing, availability discovery, fixture loading, and assertion helpers may live under `tests/de/bmf/`. They must **not** turn into a central mixed-version test suite or force version-specific case tables and registrations into one global matrix. Keep ownership of year ranges, boundaries, draft/official reference status, and test registration clear and separable by version.
