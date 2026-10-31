@@ -4,34 +4,18 @@ import {
 	deIncomeTaxV2021,
 	deSupportedTaxParametersV2021
 } from '../../src/de/index.js';
-import type { DEIncomeTaxParameters, DEIncomeTaxSupportedYears } from '@ktarmyshov/income-tax';
-import { taxCases, yearBoundaries } from './bmf/cases.js';
-import { BMF_URL, parseBmfResult } from './bmf/client.js';
+import type {
+	DEIncomeTaxParametersV2021,
+	DEIncomeTaxSupportedYearsV2021
+} from '@ktarmyshov/income-tax';
+import { taxCases, yearBoundaries, isV2021Year } from './bmf/cases.js';
+import { parseBmfResult } from './bmf/client.js';
 import { loadFixtures } from './bmf/fixtures.js';
-import { registerTaxCases } from './bmf/shared.js';
+import { registerOfficialFixtureTests } from './bmf/shared.js';
 
-describe('BMF annual income-tax fixtures', () => {
-	for (const { year } of yearBoundaries) {
-		it(`${year}: complete cases and response provenance`, () => {
-			const { fixture, html } = loadFixtures(year);
-			expect(fixture.source).toBe(BMF_URL);
-			expect(fixture.year).toBe(year);
-			expect(fixture.records.map((row) => row.input)).toStrictEqual(
-				taxCases.filter((input) => input.year === year)
-			);
-			expect(Object.keys(html).sort()).toStrictEqual(
-				fixture.records.map((row) => row.input.id).sort()
-			);
-			for (const row of fixture.records) {
-				expect(Number.isFinite(Date.parse(row.retrievedAt))).toBe(true);
-				expect(parseBmfResult(html[row.input.id], row.input)).toStrictEqual(row.expected);
-			}
-		});
-		registerTaxCases(year, (input) => {
-			const row = loadFixtures(year).fixture.records.find((row) => row.input.id === input.id);
-			if (!row) throw new Error(`Missing BMF fixture: ${input.id}`);
-			return row.expected;
-		});
+describe('V2021 official BMF annual income-tax fixtures', () => {
+	for (const entry of yearBoundaries.filter((entry) => isV2021Year(entry.year))) {
+		registerOfficialFixtureTests(entry);
 	}
 });
 
@@ -51,8 +35,8 @@ describe('API validation and immutable built-in parameters', () => {
 				expect(() => calculate({ taxable }, 2026)).toThrow();
 			}
 		);
-		it.each([2020, 2027, 2025.5, NaN])('rejects unsupported year %s', (year) => {
-			expect(() => calculate({ taxable: 50000 }, year as DEIncomeTaxSupportedYears)).toThrow();
+		it.each([2020, 2029, 2025.5, NaN])('rejects unsupported year %s', (year) => {
+			expect(() => calculate({ taxable: 50000 }, year as DEIncomeTaxSupportedYearsV2021)).toThrow();
 		});
 		it('rejects missing or invalid custom parameters', () => {
 			for (const parameters of [
@@ -61,7 +45,9 @@ describe('API validation and immutable built-in parameters', () => {
 				{ version: 'other' },
 				{ ...deSupportedTaxParametersV2021[2026], income: {} }
 			]) {
-				expect(() => calculate({ taxable: 50000 }, parameters as DEIncomeTaxParameters)).toThrow();
+				expect(() =>
+					calculate({ taxable: 50000 }, parameters as DEIncomeTaxParametersV2021)
+				).toThrow();
 			}
 		});
 		it('rejects invalid coefficients, boundaries, rates and options', () => {
@@ -90,6 +76,11 @@ describe('API validation and immutable built-in parameters', () => {
 			).toThrow();
 		});
 	}
+	it.each([2027, 2028])('V2021 still rejects year %s', (year) => {
+		expect(() =>
+			deIncomeTaxV2021({ taxable: 50000 }, year as DEIncomeTaxSupportedYearsV2021)
+		).toThrow(/Unsupported tax year/);
+	});
 	it('freezes all nested parameter objects', () => {
 		expect(Object.isFrozen(deSupportedTaxParametersV2021)).toBe(true);
 		for (const p of Object.values(deSupportedTaxParametersV2021)) {
