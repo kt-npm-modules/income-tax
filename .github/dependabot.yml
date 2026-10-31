@@ -14,8 +14,6 @@ updates:
     versioning-strategy: increase
 
     ignore:
-      - dependency-name: 'typescript'
-        versions: ['>=7.0.0']
       - dependency-name: 'npm'
         versions: ['<10.0.0', '>=11.0.0']
 
