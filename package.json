@@ -83,7 +83,7 @@
 		"publint": "^0.3.25",
 		"rimraf": "^6.1.3",
 		"tsx": "^4.23.15",
-		"typescript": "~6.0.3",
+		"typescript": "~7.0.2",
 		"typescript-eslint": "^8.72.1",
 		"vitest": "5.0.5"
 	},
