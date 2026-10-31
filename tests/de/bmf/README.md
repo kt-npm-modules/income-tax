@@ -27,6 +27,6 @@ Requests run sequentially in the live suite with a short delay, a per-request ti
 
 A missing historical year is explicitly reported and its live group skipped; its offline fixtures remain usable. Network failures, malformed pages, and numerical mismatches fail the live run. The updater fails rather than manufacturing responses for an unavailable year.
 
-There are two Vitest configurations: `vitest.config.ts` for offline tests and `vitest.bmf.config.ts` for live tests. Local runs stay separate. The existing GitHub CI test job runs both `npm run coverage` and `npm run test:bmf` for every Node matrix entry before uploading coverage. BMF availability is therefore required by the live CI step. No additional workflow is added.
+There are two Vitest configurations: `vitest.config.ts` for offline tests and `vitest.bmf.config.ts` for live tests. Local runs stay separate. GitHub CI runs only the offline coverage suite on its Node matrix. `.github/workflows/bmf-live.yml` runs `npm run test:bmf` separately on Node 24 every Monday at 05:23 UTC and on manual `workflow_dispatch`. Live BMF availability does not block pull-request checks.
 
 BMF displays the total rate as the sum of its already rounded income-tax and solidarity rates. The library follows that display convention; it can differ by 0.01 percentage points from dividing the total tax by taxable income and rounding only once. Decimal arithmetic is used for this addition as well.

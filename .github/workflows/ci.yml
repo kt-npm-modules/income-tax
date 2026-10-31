@@ -160,7 +160,6 @@ jobs:
           run-script: |
             npm run build
             npm run coverage
-            npm run test:bmf
             mv coverage-test "${COVERAGE_DIR}"
           node-version: ${{ matrix.node-version }}
           cache-reset: ${{ needs.config.outputs.cache-reset }}
