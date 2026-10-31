@@ -28,7 +28,7 @@ function freezeTaxParameters<const T extends Record<number, DEIncomeTaxParameter
 }
 
 // Final annual tariffs under section 32a EStG, including the retroactive
-// allowance increases for 2022 and 2024. Source links: docs/plan.md.
+// allowance increases for 2022 and 2024. Source links: README.md.
 export const deSupportedTaxParametersV2021 = freezeTaxParameters({
 	2021: {
 		version: 'V2021',

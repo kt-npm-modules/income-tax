@@ -1,22 +1,80 @@
 import type { DEIncomeTaxSupportedYearsV2021 } from '../../../src/de/V2021/types.js';
+import type { DEIncomeTaxSupportedYears } from '../../../src/de/types.js';
 
 export type TaxCase = {
 	id: string;
-	year: DEIncomeTaxSupportedYearsV2021;
+	year: DEIncomeTaxSupportedYears;
 	taxable: number;
 	split: boolean;
 };
 
-// Independent case-selection data from the final BMF annual tariffs (docs/plan.md).
+// Independent case-selection data: final historical tariffs (README.md),
+// provisional 2027-2028 legislation (docs/V2027.md).
 // Never derive test inputs or expected amounts from the production calculator.
 export const yearBoundaries = [
-	{ year: 2021, boundaries: [9744, 14753, 57918, 274612], exemption: 16956, subtrahend: 9136.63 },
-	{ year: 2022, boundaries: [10347, 14926, 58596, 277825], exemption: 16956, subtrahend: 9336.45 },
-	{ year: 2023, boundaries: [10908, 15999, 62809, 277825], exemption: 17543, subtrahend: 9972.98 },
-	{ year: 2024, boundaries: [11784, 17005, 66760, 277825], exemption: 18130, subtrahend: 10636.31 },
-	{ year: 2025, boundaries: [12096, 17443, 68480, 277825], exemption: 19950, subtrahend: 10911.92 },
-	{ year: 2026, boundaries: [12348, 17799, 69878, 277825], exemption: 20350, subtrahend: 11135.63 }
+	{
+		year: 2021,
+		boundaries: [9744, 14753, 57918, 274612],
+		exemption: 16956,
+		subtrahend: 9136.63,
+		hasOfficialFixtures: true
+	},
+	{
+		year: 2022,
+		boundaries: [10347, 14926, 58596, 277825],
+		exemption: 16956,
+		subtrahend: 9336.45,
+		hasOfficialFixtures: true
+	},
+	{
+		year: 2023,
+		boundaries: [10908, 15999, 62809, 277825],
+		exemption: 17543,
+		subtrahend: 9972.98,
+		hasOfficialFixtures: true
+	},
+	{
+		year: 2024,
+		boundaries: [11784, 17005, 66760, 277825],
+		exemption: 18130,
+		subtrahend: 10636.31,
+		hasOfficialFixtures: true
+	},
+	{
+		year: 2025,
+		boundaries: [12096, 17443, 68480, 277825],
+		exemption: 19950,
+		subtrahend: 10911.92,
+		hasOfficialFixtures: true
+	},
+	{
+		year: 2026,
+		boundaries: [12348, 17799, 69878, 277825],
+		exemption: 20350,
+		subtrahend: 11135.63,
+		hasOfficialFixtures: true
+	},
+	{
+		year: 2027,
+		boundaries: [12564, 17799, 70600, 249999, 279999],
+		exemption: 20350,
+		subtrahend: 11241.73,
+		hasOfficialFixtures: false
+	},
+	{
+		year: 2028,
+		boundaries: [12900, 17799, 70600, 249999, 279999],
+		exemption: 20350,
+		subtrahend: 11305.52,
+		hasOfficialFixtures: false
+	}
 ] as const;
+
+export function isV2021Year(
+	year: DEIncomeTaxSupportedYears
+): year is DEIncomeTaxSupportedYearsV2021 {
+	return year <= 2026;
+}
 
 export const taxCases: TaxCase[] = [];
 for (const { year, boundaries, exemption, subtrahend } of yearBoundaries) {
@@ -39,6 +97,11 @@ for (const { year, boundaries, exemption, subtrahend } of yearBoundaries) {
 			incomes.add(boundary * factor + 0.99);
 			incomes.add(boundary * factor + 1.01);
 			lower = boundary;
+		}
+		if (!isV2021Year(year)) {
+			incomes.add(265000 * factor);
+			incomes.add(300000 * factor);
+			incomes.add(100001);
 		}
 		// Select zvE around the first positive Soli and the full-rate crossover.
 		const firstSoliTax = exemption + 1;
