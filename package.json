@@ -1,7 +1,7 @@
 {
 	"name": "@ktarmyshov/income-tax",
 	"description": "Calculate German income tax (Einkommensteuer) and solidarity surcharge from annual taxable income (zvE), with Ehegattensplitting. TypeScript, 2021-2026.",
-	"version": "0.1.9",
+	"version": "1.0.0",
 	"license": "MIT",
 	"author": {
 		"name": "Konstantin Tarmyshov",

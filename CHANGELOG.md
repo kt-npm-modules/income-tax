@@ -1,5 +1,35 @@
 # @ktarmyshov/income-tax
 
+## 1.0.0
+
+### Major Changes
+
+- fbecc33: Introduce `deIncomeTax(income, parameters, options)` and update `deIncomeTaxV2021` to use the same argument order. Pass a supported year (2021–2026) or a complete versioned parameter object, with assessment options such as `split` kept separate.
+
+  Migrate `deIncomeTaxV2021(2025, { taxable: 50000 }, options)` to `deIncomeTaxV2021({ taxable: 50000 }, 2025, options)`. Replace the removed `DETaxOptions` type with `DEIncomeTaxOptions` or `DEIncomeTaxOptionsV2021`. Custom tariffs now require a complete second-argument parameter object with `version: 'V2021'`, `income`, and `solidarity`; the `incomeTaxParams` and `solidaritySurchargeParams` option overrides are removed. No legacy overloads are provided.
+
+  Replace the separate exported `deIncomeTaxSupportedYearsParamsV2021` and `deSolidaritySurchargeSupportedYearsParamsV2021` tables with `deSupportedTaxParametersV2021` and export the public input, output, options, and parameter types through both package entry points. Represent the annual tariff directly with `basicAllowance`, `firstProgression`, `secondProgression`, `firstLinear`, and `secondLinear`. Progressive formulas expose their published coefficients and constant; linear formulas expose their rate and positive subtrahend. This replaces the numbered zones and their generic offsets. Solidarity parameters use `exemption`, `rate`, and `mitigationRate` instead of a rounded crossover boundary.
+
+  Correct the statutory income-tax offsets, solidarity cap and joint-assessment calculation. Built-in parameters are deeply frozen and use the final annual tariffs, including the revised 2022 and 2024 allowances. Reject non-finite or negative taxable incomes, incomes above `Number.MAX_SAFE_INTEGER`, and invalid custom parameter values.
+
+  Rewrite the README for the 1.0 API with single/joint examples, complete custom parameters, supported-year sources, rounding rules, and migration guidance. Update the package description and keywords to identify annual German Einkommensteuer from taxable income, solidarity surcharge, and Ehegattensplitting.
+
+- fbecc33: Match BMF's displayed total rate by adding the rounded income-tax and solidarity rates with Decimal arithmetic. This can differ by 0.01 percentage points from dividing total tax by taxable income and rounding once. This rate-presentation change does not alter tax amounts.
+
+  Replace the legacy tests with shared offline-fixture and live BMF comparisons covering the final annual tariffs for 2021–2026. The reference is the official annual taxable-income HTML calculator, not the payroll XML API. Provide an explicit TypeScript command to refresh auditable official result fixtures.
+
+  Keep normal tests and Node-matrix CI offline. Run live comparisons separately with `npm run test:bmf` and a weekly/manual GitHub workflow on Node 24, without making pull-request checks depend on BMF availability. Production calculations remain offline.
+
+### Minor Changes
+
+- fbecc33: Require Node.js 22.13 or later and modernize TypeScript, linting, and test tooling. Fix emitted type imports for NodeNext consumers and prevent compiled tests from being included in build output or run twice.
+
+  Add `@mirasen/license-gate` as a development dependency and enforce an explicit dependency-license policy with `npm run lint:licenses`, included in normal lint and CI checks. Accept MPL-2.0 in the license allowlist and keep the package-specific `spdx-exceptions@*` exception visible in the report. The gate's Arborist dependency requires a current Node 22 (22.22.2+), Node 24 (24.15.0+), or Node 26+ development environment; the published library's runtime minimum is unchanged.
+
+### Patch Changes
+
+- 647b2a1: dependabot: dependency updates for PR #51
+
 ## 0.1.9
 
 ### Patch Changes
