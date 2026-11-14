@@ -1,5 +1,12 @@
 # @ktarmyshov/income-tax
 
+## 1.0.1
+
+### Patch Changes
+
+- 684d668: dependabot: dependency updates for PR #55
+- c13acc4: dependabot: dependency updates for PR #57
+
 ## 1.0.0
 
 ### Major Changes
