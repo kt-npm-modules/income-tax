@@ -3,23 +3,16 @@ import { gzipSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { format, resolveConfig } from 'prettier';
 import { BmfClient, BMF_URL } from './client.js';
-import { taxCases, yearBoundaries } from './cases.js';
+import { taxCases } from './cases.js';
+import { parseFixtureYear, selectFixtureYears } from './availability.js';
 
-const yearArgument = process.argv[2];
-if (
-	process.argv.length > 3 ||
-	(yearArgument !== undefined && !/^--year=202[1-6]$/.test(yearArgument))
-) {
-	throw new Error('Usage: npm run bmf:update-fixtures -- [--year=2021..2026]');
-}
-const selectedYear = yearArgument ? Number(yearArgument.slice('--year='.length)) : undefined;
+const selectedYear = parseFixtureYear(process.argv.slice(2));
 const client = new BmfClient();
+const years = await selectFixtureYears(client, selectedYear);
 const formatting = await resolveConfig(fileURLToPath(import.meta.url));
 const destination = new URL('./fixtures/', import.meta.url);
 await mkdir(destination, { recursive: true });
-for (const { year } of yearBoundaries.filter(
-	({ year }) => selectedYear === undefined || year === selectedYear
-)) {
+for (const { year } of years) {
 	const cases = taxCases.filter((input) => input.year === year);
 	const records = [];
 	const responses: Record<string, string> = {};

@@ -6,7 +6,9 @@
 
 # @ktarmyshov/income-tax - German Income Tax (Einkommensteuer)
 
-Calculate annual German income tax (Einkommensteuer) and solidarity surcharge (Solidaritätszuschlag) in JavaScript and TypeScript. Supply annual taxable income (zu versteuerndes Einkommen, zvE) in euros, with single or joint assessment (Ehegattensplitting). Built-in final annual tariffs cover 2021-2026; calculations use decimal arithmetic and run offline.
+Calculate annual German income tax (Einkommensteuer) and solidarity surcharge (Solidaritätszuschlag) in JavaScript and TypeScript. Supply annual taxable income (zu versteuerndes Einkommen, zvE) in euros, with single or joint assessment (Ehegattensplitting). Built-in tariffs cover 2021-2028; calculations use decimal arithmetic and run offline.
+
+**2027-2028 are provisional draft tariffs, not finalized law or BMF-verified results.** `V2021` covers final annual tariffs for 2021-2026; `V2027` covers both draft years. This feature is not yet approved for a stable 1.1.0 release. See [V2027 Legislative Basis and Finalization](docs/V2027.md).
 
 ES modules with TypeScript declarations. For Node.js runtime requirements, see the `engines` field in [package.json](https://github.com/kt-npm-modules/income-tax/blob/main/package.json).
 
@@ -75,7 +77,27 @@ console.log(tax.total); // 21096
 
 ## API Reference
 
-Call `deIncomeTax(income, yearOrParameters, options?)`. The model-specific `deIncomeTaxV2021` uses the same arguments and returns the same result.
+Call `deIncomeTax(income, yearOrParameters, options?)`. The model-specific `deIncomeTaxV2021` (2021-2026) and `deIncomeTaxV2027` (2027-2028) use the same arguments and return the same result.
+
+Draft-year examples:
+
+```ts
+import {
+	deIncomeTax,
+	deIncomeTaxV2027,
+	deSupportedTaxParametersV2027
+} from '@ktarmyshov/income-tax';
+import type { DEIncomeTaxParametersV2027 } from '@ktarmyshov/income-tax';
+
+const draft2027 = deIncomeTax({ taxable: 50_000 }, 2027);
+const draft2028 = deIncomeTax({ taxable: 50_000 }, 2028);
+const joint2028 = deIncomeTax({ taxable: 100_000 }, 2028, { split: true });
+const versioned = deIncomeTaxV2027({ taxable: 50_000 }, 2027);
+const parameters: DEIncomeTaxParametersV2027 = deSupportedTaxParametersV2027[2028];
+const customCall = deIncomeTax({ taxable: 50_000 }, parameters);
+```
+
+Both entry points also export `DEIncomeTaxOptionsV2027`, `DEIncomeTaxSupportedYearsV2027`, `DEIncomeTaxYearParamsV2027`, `DEIncomeTaxProgressionParamsV2027`, `DEIncomeTaxLinearParamsV2027`, and `DESolidaritySurchargeYearParamsV2027`. `DEIncomeTaxSupportedYears` covers 2021-2028; `DEIncomeTaxParameters` is the discriminated union of the V2021 and V2027 parameter types. Result fields and options are unchanged.
 
 ### Inputs and Options
 
@@ -122,7 +144,7 @@ The calculation follows these rules:
 
 ## Supported Years and Sources
 
-The built-in table contains final annual parameters, including the revised allowances for 2022 and 2024:
+The historical built-in table contains final annual parameters, including the revised allowances for 2022 and 2024:
 
 | Year | Basic Allowance (EUR) | Single Soli Exemption (EUR of Income Tax) | Income Tariff Source                                                                                                                                             |
 | ---- | --------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -135,7 +157,14 @@ The built-in table contains final annual parameters, including the revised allow
 
 The solidarity exemption applies to **income tax**, not taxable income. Its assessment basis, joint exemption, mitigation cap, and cent rounding follow [SolzG sections 3-4](https://amtliche-handbuecher.bundesfinanzministerium.de/lsth/2026/B-Anhaenge/Anhang-27/I/inhalt.html).
 
-All six years have saved BMF reference comparisons for both assessment modes. `V2021` names the tariff model, not a restriction to tax year 2021. No 2027 tariff is bundled.
+All six historical years have saved BMF reference comparisons for both assessment modes. `V2021` names the tariff model, not a restriction to tax year 2021.
+
+| Draft Year | Model | Basic Allowance (EUR) | Single Soli Exemption (EUR of Income Tax) | Source                                                                            |
+| ---------- | ----- | --------------------- | ----------------------------------------- | --------------------------------------------------------------------------------- |
+| 2027       | V2027 | 12,564                | 20,350                                    | [BT-Drs. 21/8235, Article 1](https://dserver.bundestag.de/btd/21/082/2108235.pdf) |
+| 2028       | V2027 | 12,900                | 20,350                                    | [BT-Drs. 21/8235, Article 2](https://dserver.bundestag.de/btd/21/082/2108235.pdf) |
+
+Both draft years share six zones, including 45% and 47% upper brackets. Annual coefficients differ; no separate `V2028` model exists. The existing SolzG rules are used provisionally for both years. Final legislation and official reference results must be reviewed before release.
 
 ## Custom Parameters
 
@@ -182,6 +211,22 @@ console.log(tax.total); // 21096
 
 Tariff boundaries must be increasing non-negative safe integers. Coefficients, constants, subtrahends, and the solidarity exemption must be finite and non-negative; rates must be fractions between zero and one. Validation checks the parameter structure and numeric ranges, not whether a custom tariff represents enacted law.
 
+For custom V2027 tariffs, use a complete `DEIncomeTaxParametersV2027` object with `version: 'V2027'`, an inclusive `secondLinear.upperBoundary`, and a `thirdLinear` formula. For example, reuse all annual fields while changing only an explicitly selected coefficient:
+
+```ts
+import { deIncomeTax, deSupportedTaxParametersV2027 } from '@ktarmyshov/income-tax';
+import type { DEIncomeTaxParametersV2027 } from '@ktarmyshov/income-tax';
+
+const base = deSupportedTaxParametersV2027[2028];
+const custom: DEIncomeTaxParametersV2027 = {
+	...base,
+	income: { ...base.income, thirdLinear: { rate: 0.48, subtrahend: 24405.47 } }
+};
+const tax = deIncomeTax({ taxable: 300_000 }, custom);
+```
+
+Custom formulas need not be continuous at boundaries. Built-in statutory coefficients are preserved exactly, including small unrounded upper-zone discrepancies.
+
 ## Scope and Common Questions
 
 ### Can I Calculate Net Salary from Gross Wages?
@@ -207,6 +252,8 @@ The reference is the [BMF annual Einkommensteuer calculator](https://www.bmf-ste
 On 2026-10-30, **902 live comparisons** matched the BMF form across 2021-2026, both assessment modes, all returned amounts, and displayed rates. The matrix covers tariff-boundary neighbors, midpoints, fractional and odd joint incomes, solidarity transitions, high incomes, and earlier numerical defects. This is reference testing, not official certification or proof of every possible input.
 
 Normal tests and pull-request CI use saved, dated BMF results without network access. Offline checks also reparse the stored HTML result excerpts and validate inputs, public imports, and frozen parameters. A separate workflow compares fresh BMF results; service failures and mismatches fail that live run. Unavailable historical years are reported separately.
+
+2027-2028 use separate, independently calculated statutory **draft** vectors, not official BMF fixtures. As recorded during discovery, the BMF form currently offers years only through 2026. Live tests discover the form's years and automatically compare the full registered matrix for either new year once offered, even before fixed fixtures are captured. Successful discovery of an unavailable year permits an explicit skip; network/parser errors and disappearing active years fail. No new live batch was run for this implementation.
 
 For provenance, case selection, and live-test behavior, see [BMF Annual Income-Tax Reference Tests](https://github.com/kt-npm-modules/income-tax/blob/main/tests/de/bmf/README.md). See [BMF Live Verification](https://github.com/kt-npm-modules/income-tax/actions/workflows/bmf-live.yml) for workflow runs.
 

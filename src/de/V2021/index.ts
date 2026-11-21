@@ -1,9 +1,8 @@
 import assert from '@ktarmyshov/assert';
-import { Decimal } from 'decimal.js';
+import { assessIncomeTax } from '../_common/assessment.js';
 import type { DEIncome, DEIncomeTax } from '../_common/types.js';
 import { defaultDETaxOptions } from '../types.js';
 import { calculateIncomeTaxYear } from './income.js';
-import { calculateSolidaritySurcharge } from './solidarity.js';
 import {
 	deSupportedTaxParametersV2021,
 	type DEIncomeTaxOptionsV2021,
@@ -88,38 +87,7 @@ export function deIncomeTaxV2021(
 	const split = opts.split ?? false;
 	assert.ok(typeof split === 'boolean', 'The split option must be a boolean');
 
-	const taxable = new Decimal(income.taxable);
-	// Section 32a EStG: apply the tariff to whole-euro income; floor the tax
-	// before doubling it for joint assessment.
-	const tariffIncome = taxable.div(split ? 2 : 1).floor();
-	const incomeTax = calculateIncomeTaxYear(tariffIncome.toNumber(), taxParams.income);
-	const assessedIncomeTax = incomeTax.tax.floor().mul(split ? 2 : 1);
-	// Apply SolzG to the full assessment with the matching single/joint exemption.
-	// Fractions of a cent are discarded only after calculating the surcharge.
-	const solidarity = calculateSolidaritySurcharge(
-		assessedIncomeTax.toNumber(),
-		taxParams.solidarity,
-		split
-	).toDecimalPlaces(2, Decimal.ROUND_FLOOR);
-	const total = assessedIncomeTax.plus(solidarity);
-	const rate = (amount: Decimal): number =>
-		taxable.isZero() ? 0 : amount.div(taxable).toDecimalPlaces(4, Decimal.ROUND_HALF_UP).toNumber();
-
-	const incomeAverage = rate(assessedIncomeTax);
-	const solidarityRate = rate(solidarity);
-	// Match BMF's displayed total: add the rounded component rates exactly.
-	const totalRate = new Decimal(incomeAverage).plus(solidarityRate).toNumber();
-
-	return {
-		income: assessedIncomeTax.toNumber(),
-		solidarity: solidarity.toNumber(),
-		total: total.toNumber(),
-		rates: {
-			// Analytic income-tax marginal rate, truncated to four decimal places.
-			incomeMarginal: incomeTax.marginalTaxRate.toDecimalPlaces(4, Decimal.ROUND_FLOOR).toNumber(),
-			incomeAverage,
-			solidarity: solidarityRate,
-			total: totalRate
-		}
-	};
+	return assessIncomeTax(income, taxParams.solidarity, split, (taxable) =>
+		calculateIncomeTaxYear(taxable, taxParams.income)
+	);
 }

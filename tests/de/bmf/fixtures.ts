@@ -1,6 +1,8 @@
 import { readFileSync } from 'node:fs';
+import assert from 'node:assert/strict';
 import { gunzipSync } from 'node:zlib';
-import type { TaxCase } from './cases.js';
+import { taxCases, type TaxCase } from './cases.js';
+import { BMF_URL, parseBmfResult } from './client.js';
 import type { BmfExpected } from './client.js';
 
 export type BmfFixture = {
@@ -24,4 +26,25 @@ export function loadFixtures(year: number) {
 		cache.set(year, result);
 	}
 	return result;
+}
+
+/** Check the complete official input matrix and the provenance of every raw response. */
+export function verifyFixtureProvenance(
+	year: number,
+	{ fixture, html }: ReturnType<typeof loadFixtures>
+) {
+	assert.equal(fixture.source, BMF_URL);
+	assert.equal(fixture.year, year);
+	assert.deepEqual(
+		fixture.records.map((row) => row.input),
+		taxCases.filter((input) => input.year === year)
+	);
+	assert.deepEqual(Object.keys(html).sort(), fixture.records.map((row) => row.input.id).sort());
+	for (const row of fixture.records) {
+		assert.ok(
+			Number.isFinite(Date.parse(row.retrievedAt)),
+			`Invalid BMF retrieval time: ${row.input.id}`
+		);
+		assert.deepEqual(parseBmfResult(html[row.input.id], row.input), row.expected);
+	}
 }

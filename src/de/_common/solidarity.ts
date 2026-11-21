@@ -1,9 +1,16 @@
 import { Decimal } from 'decimal.js';
-import type { DESolidaritySurchargeYearParamsV2021 } from './solidarity-params.js';
+
+/** Annual solidarity surcharge under sections 3-4 SolzG, without special tax bases. */
+export type DESolidaritySurchargeYearParams = {
+	/** Single-assessment exemption, doubled for splitting. */
+	exemption: number;
+	rate: number;
+	mitigationRate: number;
+};
 
 export function calculateSolidaritySurcharge(
 	incomeTax: number,
-	params: DESolidaritySurchargeYearParamsV2021,
+	params: DESolidaritySurchargeYearParams,
 	split = false
 ): Decimal {
 	const tax = new Decimal(incomeTax);
